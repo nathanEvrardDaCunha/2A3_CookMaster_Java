@@ -6,8 +6,15 @@ import java.sql.*;
 
 public class Launcher {
 
+    private static final String DB_NAME = "cookmaster";
+    private static final String USER_NAME = "root";
+    private static final String PASSWORD = "OTr;fgwskSYf,o/$";
+
     public static void main(String[] args) {
-        UsersModel model = new UsersModel("cookmaster", "root", "OTr;fgwskSYf,o/$");
+        DataGenerator dataGenerator = new DataGenerator(DB_NAME, USER_NAME, PASSWORD);
+        dataGenerator.generateDataForDB();
+
+        UsersModel model = new UsersModel(DB_NAME, USER_NAME, PASSWORD);
 
         try {
             ResultSet resultSet = model.executeQuery("SELECT * FROM users");
@@ -21,5 +28,6 @@ public class Launcher {
             e.printStackTrace();
         }
     }
-
 }
+
+
