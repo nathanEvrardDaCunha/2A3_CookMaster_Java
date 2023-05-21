@@ -74,4 +74,9 @@ public class ProductsModel extends Model {
             return -1;
         }
     }
+
+    @Override
+    public String getTableName() {
+        return "products";
+    }
 }

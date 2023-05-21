@@ -10,11 +10,16 @@ abstract class Model {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbName, userName, password);
-            System.out.println("Connected to database " + dbName);
+            System.out.println("Connected to database " + getTableName());
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
+
+    public String getTableName() {
+        return "";
+    }
+
 
     public ResultSet executeQuery(String query) {
         try {
@@ -35,6 +40,19 @@ abstract class Model {
             return -1;
         }
     }
+
+    public void purge() {
+        // Delete all rows from the table
+        String sqlDelete = "DELETE FROM " + this.getTableName();
+        this.executeUpdate(sqlDelete);
+        System.out.println("All data from table " + this.getTableName() + " has been deleted.");
+
+        // Reset AUTO_INCREMENT
+        String sqlAlter = "ALTER TABLE " + this.getTableName() + " AUTO_INCREMENT = 1";
+        this.executeUpdate(sqlAlter);
+        System.out.println("AUTO_INCREMENT for table " + this.getTableName() + " has been reset to 1.");
+    }
+
 
     public void close() {
         try {

@@ -89,4 +89,8 @@ public class UsersModel extends Model {
         }
     }
 
+    @Override
+    public String getTableName() {
+        return "users";
+    }
 }

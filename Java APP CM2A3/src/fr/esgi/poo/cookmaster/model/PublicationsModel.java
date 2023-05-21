@@ -65,4 +65,9 @@ public class PublicationsModel extends Model {
             return -1;
         }
     }
+
+    @Override
+    public String getTableName() {
+        return "publications";
+    }
 }

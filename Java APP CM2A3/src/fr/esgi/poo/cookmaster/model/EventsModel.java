@@ -83,4 +83,9 @@ public class EventsModel extends Model {
             return null;
         }
     }
+
+    @Override
+    public String getTableName() {
+        return "events";
+    }
 }

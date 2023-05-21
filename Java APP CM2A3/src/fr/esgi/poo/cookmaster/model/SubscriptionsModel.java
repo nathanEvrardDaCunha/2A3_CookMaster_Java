@@ -75,4 +75,8 @@ public class SubscriptionsModel extends Model {
         }
     }
 
+    @Override
+    public String getTableName() {
+        return "subscriptions";
+    }
 }
