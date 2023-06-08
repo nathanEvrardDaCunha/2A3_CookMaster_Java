@@ -20,9 +20,6 @@ public class DataGenerator {
     }
 
     public void generateDataForDB() {
-        DataRandomizer dataRandomizer = new DataRandomizer();
-        DataTemplateValues dataTemplateValues = new DataTemplateValues();
-
         DataGenerateSubscription dataGenerateSubscription = new DataGenerateSubscription(dbName, userName, password);
         DataGenerateEvent dataGenerateEvent = new DataGenerateEvent(dbName, userName, password);
         DataGenerateProvider dataGenerateProvider = new DataGenerateProvider(dbName, userName, password);
@@ -107,37 +104,6 @@ public class DataGenerator {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-        /*for (int i = 1; i <= 200; i++) {
-            try {
-                //IL VA FALLOIR FAIRE UNE BOUCLE FOR SEPARER POUR CHAQUE FONCTION
-                generateProducts
-                generateBills(i, dataRandomizer, dataTemplateValues);
-                generatePublications(i, dataRandomizer, dataTemplateValues);
-
-                1 - 1 : relation directe de 1 a 1
-                n - 1 : relation partant de 1 vers n (donnée aléatoire)
-                n - n : relation partant de n (donnée aléatoire) vers n (donnée aléatoire)
-
-                //generateRegister(i);
-                //generateOrganise(i);
-                //generateRent(i);
-                //generateBuy(i);
-                //generateGenerate(i);
-                //generatePrint(i);
-
-                POUR L'UTILISATEUR FREQUENCE DE SON ABONNEMENT (ENDING DATE SUBSCRIPTION) :
-                        //Récupérer la fréquence de l'abonnement est l'ajouté a la date => En réalité je vais faire un UPDATE a cette utilisateur
-        //durant le moment ou je créé la table des relation entre les abonnements et les utilisateurs pour que l'utilisateur (id: 1) soit abonné a l'abonnement (id: 1)
-        //et ensuite je vais faire un UPDATE sur l'utilisateur (id: 1) pour lui ajouter la date de fin d'abonnement
-
-
-            } catch (SQLException e) {
-                System.err.println("An error occurred while generating data: " + e.getMessage());
-            }
-        }*/
     }
 
 
