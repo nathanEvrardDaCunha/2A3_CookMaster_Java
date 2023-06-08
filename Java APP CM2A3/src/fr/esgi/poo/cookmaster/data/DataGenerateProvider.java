@@ -1,12 +1,21 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.ProvidersModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
+import fr.esgi.poo.cookmaster.tools.CommonSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Random;
 
 public class DataGenerateProvider {
+
+    private static final int PROVIDER_MIN_TYPE = 0;
+    private static final int PROVIDER_MAX_TYPE = 3;
+    private static final int RANDOM_INDEX = 0;
+    private static final int PROVIDER_COST_MIN = 100;
+    private static final int PROVIDER_COST_MAX = 300;
+    private static final int PROVIDER_EVENT_MIN = 2;
+    private static final int PROVIDER_EVENT_MAX = 50;
 
     private final String dbName;
     private final String userName;
@@ -30,18 +39,18 @@ public class DataGenerateProvider {
         String providerFirstname;
 
         do {
-            providerType = selectRandomProviderType();
+            providerType = CommonDataGenerator.selectRandomInt(PROVIDER_MIN_TYPE, PROVIDER_MAX_TYPE);
 
-            randomIndex = selectRandomIndex(15);
+            randomIndex = CommonDataGenerator.selectRandomInt(RANDOM_INDEX, CommonSettings.ALL_ARRAY_SIZE);
             providerCompanyName = selectRandomProviderCompanyName(randomIndex);
 
-            providerLastname = selectRandomProviderLastname();
-            providerFirstname = selectRandomProviderFirstname();
+            providerLastname = CommonDataGenerator.selectRandomLastname();
+            providerFirstname = CommonDataGenerator.selectRandomFirstname();
         }while(providersModel.providerExists(providerFirstname, providerLastname, providerCompanyName, providerType));
 
         String providerDescription = selectRandomProviderDescription(randomIndex);
-        int providerCost = selectRandomProviderCost(50, 130);
-        int providerNumberOfEventsOrganised = selectRandomProviderNumberOfEventsOrganised();
+        int providerCost = CommonDataGenerator.selectRandomInt(PROVIDER_COST_MIN, PROVIDER_COST_MAX);
+        int providerNumberOfEventsOrganised = CommonDataGenerator.selectRandomInt(PROVIDER_EVENT_MIN, PROVIDER_EVENT_MAX);
 
         String sql = "INSERT INTO PROVIDERS(Firstname, Lastname, Type, Provider_compagny_name, Cost, Description, Number_of_events_organised) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -61,26 +70,6 @@ public class DataGenerateProvider {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private int selectRandomProviderType() {
-        int random = (int) (Math.random() * 3);
-        return random;
-    }
-
-    private int selectRandomProviderCost(int min, int max) {
-        int random = (int) (Math.random() * (max - min + 1) + min);
-        return random;
-    }
-
-    private int selectRandomProviderNumberOfEventsOrganised() {
-        int random = (int) (Math.random() * 25);
-        return random;
-    }
-
-    private int selectRandomIndex(int max) {
-        Random random = new Random();
-        return random.nextInt(max);
     }
 
     private String selectRandomProviderCompanyName(int randomIndex) {
@@ -134,29 +123,5 @@ public class DataGenerateProvider {
         };
 
         return providerDescriptionsArray[randomIndex];
-    }
-
-    private String selectRandomProviderLastname(){
-        String[] providerLastnameArray = {
-                "RAMSAY", "CHILD", "BOCUSE", "LAWSON", "OLIVER", "STEWART", "RAY", "BATALI",
-                "HERMÉ", "KELLER", "DUCASSE", "ROBUCHON", "FIERI", "BOULUD", "PUCK", "BLUMENTHAL",
-                "REDZEPI", "ADRIÀ", "BOTTURA", "BOURDAIN", "CRENN", "PÉPIN", "AUGUSTE", "SAFFITZ",
-                "OTTOLENGHI", "PIERREWHITE", "FLAY", "DE LAURENTIIS", "GARTEN", "SAMUELSSON"
-        };
-
-        int randomIndex = selectRandomIndex(15);
-        return providerLastnameArray[randomIndex];
-    }
-
-    private String selectRandomProviderFirstname(){
-        String[] providerLastnameArray = {
-                "Gordon", "Julia", "Paul", "Nigella", "Jamie", "Martha", "Rachel", "Mario", "Pierre",
-                "Thomas", "Alain", "Joël", "Guy", "Daniel", "Wolfgang", "Heston", "René",
-                "Ferran", "Massimo", "Anthony", "Dominique", "Jacques", "Georges",
-                "Claire", "Yotam", "Marco", "Bobby", "Giada", "Ina", "Marcus"
-        };
-
-        int randomIndex = selectRandomIndex(15);
-        return providerLastnameArray[randomIndex];
     }
 }

@@ -1,12 +1,20 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.EquipmentsModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
+import fr.esgi.poo.cookmaster.tools.CommonSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Random;
 
 public class DataGenerateEquipment {
+
+    private static final int EQUIPMENT_MIN_COST = 2;
+    private static final int EQUIPMENT_MAX_COST = 1000;
+    private static final int EQUIPMENT_MIN_TYPE = 0;
+    private static final int EQUIPMENT_MAX_TYPE = 5;
+    private static final int EQUIPMENT_MIN_BRAND = 0;
+    private static final int EQUIPMENT_MIN_TITLE = 0;
 
     private final String dbName;
     private final String userName;
@@ -45,17 +53,12 @@ public class DataGenerateEquipment {
         }
     }
 
-    private int selectRandomIndex(int max) {
-        Random random = new Random();
-        return random.nextInt(max);
-    }
-
     private int selectEquipmentCost(String equipmentTitle, String equipmentBrand) {
         EquipmentsModel equipmentsModel = new EquipmentsModel(dbName, userName, password);
         try {
             return equipmentsModel.equipmentCostExist(equipmentTitle, equipmentBrand);
         } catch (SQLException e) {
-            return selectRandomIndex(1000);
+            return CommonDataGenerator.selectRandomInt(EQUIPMENT_MIN_COST, EQUIPMENT_MAX_COST);
         }
     }
 
@@ -64,7 +67,7 @@ public class DataGenerateEquipment {
         try {
             return equipmentsModel.equipmentTypeExist(equipmentTitle, equipmentBrand);
         } catch (SQLException e) {
-            return selectRandomIndex(5);
+            return CommonDataGenerator.selectRandomInt(EQUIPMENT_MIN_TYPE, EQUIPMENT_MAX_TYPE);
         }
     }
 
@@ -79,7 +82,7 @@ public class DataGenerateEquipment {
                 "HACHOIR A VIANDE", "GRILL", "MIXEUR", "ESSOREUSE A SALADE", "SOUPIERE"
         };
 
-        int randomIndex = selectRandomIndex(15);
+        int randomIndex = CommonDataGenerator.selectRandomInt(EQUIPMENT_MIN_TITLE, CommonSettings.ALL_ARRAY_SIZE);
         return equipmentTitlesArray[randomIndex];
     }
 
@@ -92,7 +95,7 @@ public class DataGenerateEquipment {
                 "SIEMENS", "AEG", "ELECTROLUX"
         };
 
-        int randomIndex = selectRandomIndex(15);
+        int randomIndex = CommonDataGenerator.selectRandomInt(EQUIPMENT_MIN_BRAND, CommonSettings.ALL_ARRAY_SIZE);
         return equipmentBrandsArray[randomIndex];
     }
 

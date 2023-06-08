@@ -1,12 +1,18 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.SubscriptionsModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Random;
 
 public class DataGenerateSubscription {
+
+    private static final int RANDOM_INDEX_MIN = 0;
+    private static final int RANDOM_INDEX_MAX = 2;
+    private static final int SUPBSCRIPTION_FREQUENCY_MONTH = 30;
+    private static final int SUPBSCRIPTION_FREQUENCY_YEAR = 365;
 
     private final String dbName;
     private final String userName;
@@ -21,7 +27,8 @@ public class DataGenerateSubscription {
     public void generateSubscriptions(int i) throws SQLException {
 
         int subscriptionFrequencyOfCost = selectSubscriptionFrequencyOfCost();
-        int randomIndex = selectRandomIndex();
+
+        int randomIndex = CommonDataGenerator.selectRandomInt(RANDOM_INDEX_MIN, RANDOM_INDEX_MAX);
         int subscriptionType = selectSubscriptionType(randomIndex);
         double subscriptionCost = selectSubscriptionCost(randomIndex, subscriptionFrequencyOfCost);
 
@@ -48,24 +55,13 @@ public class DataGenerateSubscription {
 
     private int selectSubscriptionFrequencyOfCost() {
         int[] subscriptionFrequencyOfCostsArray = {
-                30, 365
+                SUPBSCRIPTION_FREQUENCY_MONTH, SUPBSCRIPTION_FREQUENCY_YEAR
         };
 
         Random random = new Random();
         int randomIndex = random.nextInt(subscriptionFrequencyOfCostsArray.length);
 
         return subscriptionFrequencyOfCostsArray[randomIndex];
-    }
-
-    private int selectRandomIndex() {
-        int[] subscriptionTypesArray = {
-                0, 1, 2
-        };
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(subscriptionTypesArray.length);
-
-        return randomIndex;
     }
 
     private int selectSubscriptionType(int randomIndex) {
@@ -85,9 +81,9 @@ public class DataGenerateSubscription {
                 0, 113, 220
         };
 
-        if (subscriptionFrequencyOfCost == 30) {
+        if (subscriptionFrequencyOfCost == SUPBSCRIPTION_FREQUENCY_MONTH) {
             return subscriptionCostsMonthsArray[randomIndex];
-        } else if (subscriptionFrequencyOfCost == 365) {
+        } else if (subscriptionFrequencyOfCost == SUPBSCRIPTION_FREQUENCY_YEAR) {
             return subscriptionCostsYearsArray[randomIndex];
         } else {
             return 0;

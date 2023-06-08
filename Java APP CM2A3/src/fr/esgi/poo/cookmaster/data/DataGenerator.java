@@ -1,18 +1,24 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.*;
 
 import java.sql.*;
-import java.util.Random;
 
 public class DataGenerator {
+
+    private static final int NUMBER_OF_SUBSCRIPTIONS = 200;
+    private static final int NUMBER_OF_EVENTS = 200;
+    private static final int NUMBER_OF_PROVIDERS = 200;
+    private static final int NUMBER_OF_EVENT_LOCATIONS = 200;
+    private static final int NUMBER_OF_USERS = 200;
+    private static final int NUMBER_OF_EQUIPMENTS = 200;
+    private static final int NUMBER_OF_BILLS = 200;
+    private static final int NUMBER_OF_PRODUCTS = 200;
+    private static final int NUMBER_OF_PUBLICATIONS = 200;
 
     private final String dbName;
     private final String userName;
     private final String password;
-
-
-
     public DataGenerator(String dbName, String userName, String password) {
         this.dbName = dbName;
         this.userName = userName;
@@ -31,7 +37,7 @@ public class DataGenerator {
         DataGeneratePublication dataGeneratePublication = new DataGeneratePublication(dbName, userName, password);
 
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_SUBSCRIPTIONS; i++) {
                 dataGenerateSubscription.generateSubscriptions(i);
             }
         } catch (SQLException e) {
@@ -39,7 +45,7 @@ public class DataGenerator {
         }
 
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_EVENTS; i++) {
                 dataGenerateEvent.generateEvents(i);
             }
         } catch (SQLException e) {
@@ -47,7 +53,7 @@ public class DataGenerator {
         }
 
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_PROVIDERS; i++) {
                 dataGenerateProvider.generateProviders(i);
             }
         } catch (SQLException e) {
@@ -55,7 +61,7 @@ public class DataGenerator {
         }
 
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_EVENT_LOCATIONS; i++) {
                 dataGenerateEventLocation.generateEventLocations(i);
             }
         } catch (SQLException e) {
@@ -64,7 +70,7 @@ public class DataGenerator {
 
         // FAIRE UN UPDATE DES VALEURS DE CETTE CLASSE
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_USERS; i++) {
                 dataGenerateUser.generateUsers(i);
             }
         } catch (SQLException e) {
@@ -72,7 +78,7 @@ public class DataGenerator {
         }
 
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_EQUIPMENTS; i++) {
                 dataGenerateEquipment.generateEquipments(i);
             }
         } catch (SQLException e) {
@@ -81,7 +87,7 @@ public class DataGenerator {
 
         // FAIRE UN UPDATE DES VALEURS DE CETTE CLASSE
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_BILLS; i++) {
                 dataGenerateBill.generateBills(i);
             }
         } catch (SQLException e) {
@@ -89,7 +95,7 @@ public class DataGenerator {
         }
 
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_PRODUCTS; i++) {
                 dataGenerateProduct.generateProducts(i);
             }
         } catch (SQLException e) {
@@ -98,7 +104,7 @@ public class DataGenerator {
 
         // FAIRE UN UPDATE DES VALEURS DE CETTE CLASSE
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= NUMBER_OF_PUBLICATIONS; i++) {
                 dataGeneratePublication.generatePublications(i);
             }
         } catch (SQLException e) {

@@ -1,14 +1,14 @@
 package fr.esgi.poo.cookmaster.main;
 
+import fr.esgi.poo.cookmaster.data.DataGenerator;
+import fr.esgi.poo.cookmaster.data.DataPurger;
 import fr.esgi.poo.cookmaster.model.*;
 
 import java.sql.*;
 
-public class Launcher {
+import static fr.esgi.poo.cookmaster.tools.CommonSettings.*;
 
-    private static final String DB_NAME = "cookmaster";
-    private static final String USER_NAME = "root";
-    private static final String PASSWORD = "OTr;fgwskSYf,o/$";
+public class Launcher {
 
     public static void main(String[] args) {
         DataPurger dataPurger = new DataPurger(DB_NAME, USER_NAME, PASSWORD);
@@ -26,7 +26,7 @@ public class Launcher {
          *
          * - Rajouter des exceptions si besoin
          *
-         * - Remplacer les valeurs brutes par des variables ou des constantes
+         *
          *
          * - Séparer les identifiants de la BDD dans un fichier a ne pas commit
          *
@@ -36,6 +36,9 @@ public class Launcher {
          *
          * - S'assurer que la limite dans le choix Random est bien de la taille des array
          *
+         *
+         * - Remplacer les valeurs brutes par des variables ou des constantes
+         * - Faire en sorte que PostalCode, RandomInt, Adress
          */
 
 

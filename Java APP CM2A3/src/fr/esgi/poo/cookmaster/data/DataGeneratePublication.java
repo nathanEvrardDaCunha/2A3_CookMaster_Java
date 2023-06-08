@@ -1,12 +1,15 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.PublicationsModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
+import fr.esgi.poo.cookmaster.tools.CommonSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Random;
 
 public class DataGeneratePublication {
+
+    private static final int RANDOM_INT_MIN = 0;
 
     private final String dbName;
     private final String userName;
@@ -22,9 +25,9 @@ public class DataGeneratePublication {
 
         //PARTIE A REVOIR POUR ETRE SUR QUE CHAQUE CHOSE EST COHERENTE
         //Etre sûr que l'utilisateur qui publie est un utilisateur qui existe (donc vérifier date d'inscription)
-        String publicationDate = selectTempPublicationDate();
+        String publicationDate = CommonDataGenerator.selectRandomDate();
 
-        int randomInt = new Random().nextInt(10);
+        int randomInt = CommonDataGenerator.selectRandomInt(RANDOM_INT_MIN, CommonSettings.ALL_ARRAY_SIZE);
         String publicationTitle = selectRandomPublicationTitle(randomInt);
         String publicationDescription = selectRandomPublicationDescription(randomInt);
 
@@ -44,12 +47,6 @@ public class DataGeneratePublication {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private String selectTempPublicationDate() {
-        Random random = new Random();
-        int randomInt = random.nextInt(30);
-        return "2021-05-01";
     }
 
     private String selectRandomPublicationTitle(int randomInt) {

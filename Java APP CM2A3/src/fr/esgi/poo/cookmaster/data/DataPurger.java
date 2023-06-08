@@ -1,4 +1,4 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.*;
 
@@ -14,7 +14,6 @@ public class DataPurger {
         this.password = password;
     }
 
-
     public void purgeData() {
         UsersModel usersModel = new UsersModel(dbName, userName, password);
         EventsModel eventsModel = new EventsModel(dbName, userName, password);
@@ -29,19 +28,19 @@ public class DataPurger {
         OrganiseModel organiseModel = new OrganiseModel(dbName, userName, password);
         BuyModel buyModel = new BuyModel(dbName, userName, password);
         GenerateModel generateModel = new GenerateModel(dbName, userName, password);
-        PrintModel printModel = new PrintModel(dbName, userName, password);  // assuming you have this model
-        RegisterModel registerModel = new RegisterModel(dbName, userName, password);  // assuming you have this model
+        PrintModel printModel = new PrintModel(dbName, userName, password);
+        RegisterModel registerModel = new RegisterModel(dbName, userName, password);
 
         generateModel.purge();
         buyModel.purge();
         rentModel.purge();
         organiseModel.purge();
-        printModel.purge();  // purge print before bills and products
-        registerModel.purge();  // purge register before users
-        publicationsModel.purge();  // purge publications before users
-        billsModel.purge(); // purge bills before events
-        equipmentsModel.purge(); // purge equipments before events
-        usersModel.purge();  // purge users before subscriptions
+        printModel.purge();
+        registerModel.purge();
+        publicationsModel.purge();
+        billsModel.purge();
+        equipmentsModel.purge();
+        usersModel.purge();
         subscriptionsModel.purge();
         productsModel.purge();
         eventsLocationModel.purge();

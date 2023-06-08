@@ -1,17 +1,29 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.UsersModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Random;
 import java.security.*;
 import java.util.Base64;
 
-
 public class DataGenerateUser {
+
+    private static final String USER_BIRTHDAY_DATE_MIN = "1980-01-01";
+    private static final int USER_BIRTHDAY_YEARS_OFFSET_MAX = 24;
+    private static final int USER_MIN_SEX = 0;
+    private static final int USER_MAX_SEX = 2;
+    private static final int USER_MIN_ROLE = 0;
+    private static final int USER_MAX_ROLE = 2;
+    private static final int USER_REGISTRATION_YEARS_OFFSET_MAX = 24;
+    private static final int USER_STARTING_SUBSCRIPTION_YEARS_OFFSET_MAX = 2;
+    private static final int USER_LAST_PURCHASE_YEARS_OFFSET_MAX = 2;
+    private static final int USER_ENDING_SUBSCRIPTION_YEARS_OFFSET_MAX = 1;
+    private static final int USER_MIN_FIDELITY_POINT = 0;
+    private static final int USER_MAX_FIDELITY_POINT = 1000;
+    private static final int USER_MIN_NICKNAME_NUMBER = 0;
+    private static final int USER_MAX_NICKNAME_NUMBER = 1000;
 
     private final String dbName;
     private final String userName;
@@ -40,13 +52,13 @@ public class DataGenerateUser {
         String userName;
 
         do {
-            userBirthday = selectUserBirthDay(1980, 2000);
-            userFirstname = selectUserFirstname();
-            userLastname = selectUserLastname();
+            userBirthday = CommonDataGenerator.selectRandomDate(USER_BIRTHDAY_DATE_MIN, USER_BIRTHDAY_YEARS_OFFSET_MAX);
+            userFirstname = CommonDataGenerator.selectRandomFirstname();
+            userLastname = CommonDataGenerator.selectRandomLastname();
 
-            userPostalCode = selectUserPostalCode();
-            userAddress = selectUserAddress();
-            userCity = selectUserCity();
+            userPostalCode = CommonDataGenerator.selectRandomPostalCode();
+            userAddress = CommonDataGenerator.selectRandomAdress();
+            userCity = CommonDataGenerator.selectRandomCity();
 
             userEmail = selectUserEmail(userFirstname, userLastname);
             userPassword = selectUserPassword();
@@ -56,19 +68,19 @@ public class DataGenerateUser {
                 usersModel.userExistsWithEmail(userEmail) ||
                 usersModel.userExistsWithUsername(userName));
 
-        int userSex = selectUserSex();
-        int userRole = selectUserRole();
-        int userFidelityPoint = selectUserFidelityPoint();
+        int userSex = CommonDataGenerator.selectRandomInt(USER_MIN_SEX, USER_MAX_SEX);
+        int userRole = CommonDataGenerator.selectRandomInt(USER_MIN_ROLE, USER_MAX_ROLE);
+        int userFidelityPoint = CommonDataGenerator.selectRandomInt(USER_MIN_FIDELITY_POINT, USER_MAX_FIDELITY_POINT);
 
-        String userRegistrationDate = selectUserRegistrationDate(userBirthday);
+        String userRegistrationDate = CommonDataGenerator.selectRandomDate(userBirthday, USER_REGISTRATION_YEARS_OFFSET_MAX);
 
-        String userStartingSubscriptionDate = selectUserStartingSubscriptionDate(userRegistrationDate);
-        String userLastPurchaseDate = selectUserLastPurchaseDate(Integer.parseInt(userStartingSubscriptionDate.substring(0, 4)), Integer.parseInt(userStartingSubscriptionDate.substring(0, 4)) + 2);
+        String userStartingSubscriptionDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_STARTING_SUBSCRIPTION_YEARS_OFFSET_MAX);
+        String userLastPurchaseDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_LAST_PURCHASE_YEARS_OFFSET_MAX);
 
         //Récupérer la fréquence de l'abonnement est l'ajouté a la date => En réalité je vais faire un UPDATE a cette utilisateur
         //durant le moment ou je créé la table des relation entre les abonnements et les utilisateurs pour que l'utilisateur (id: 1) soit abonné a l'abonnement (id: 1)
         //et ensuite je vais faire un UPDATE sur l'utilisateur (id: 1) pour lui ajouter la date de fin d'abonnement
-        String userEndingSubscriptionDate = selectUserEndingSubscriptionDate(userStartingSubscriptionDate);
+        String userEndingSubscriptionDate = CommonDataGenerator.selectRandomDate(userStartingSubscriptionDate, USER_ENDING_SUBSCRIPTION_YEARS_OFFSET_MAX);
 
         String sql = "INSERT INTO USERS(Username, Address, City, Firstname, Lastname, Postal_code, Role, Registration_date, Fidelity_point, Last_purchase_date, Ending_subscription_date, Starting_subscription_date, Sex, Birthday, Email, Password, Id_1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -93,206 +105,19 @@ public class DataGenerateUser {
             pstmt.setString(16, userPassword);
             pstmt.setInt(17, i);
 
-            /*pstmt.setString(1, userAddress);
-            pstmt.setString(2, userCity);
-            pstmt.setString(3, userFirstname);
-            pstmt.setString(4, userLastname);
-            pstmt.setString(5, userPostalCode);
-            pstmt.setInt(6, userRole);
-            pstmt.setString(7, userRegistrationDate);
-            pstmt.setInt(8, userFidelityPoint);
-            pstmt.setString(9, userLastPurchaseDate);
-            pstmt.setString(10, userEndingSubscriptionDate);
-            pstmt.setString(11, userStartingSubscriptionDate);
-            pstmt.setInt(12, userSex);
-            pstmt.setString(13, userBirthday);
-            pstmt.setString(14, userEmail);
-            pstmt.setString(15, userPassword);
-            pstmt.setInt(16, i);*/
-
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private int selectUserSex(){
-        int randomInt = (int) (Math.random() * 2);
-        return randomInt;
-    }
-
-    private int selectUserRole(){
-        int randomInt = (int) (Math.random() * 2);
-        return randomInt;
-    }
-
-    private int selectUserFidelityPoint(){
-        int randomInt = (int) (Math.random() * 1000);
-        return randomInt;
-    }
-
-    private String selectUserBirthDay(int startingYear, int endingYear) {
-        Random random = new Random();
-        int year = random.nextInt(endingYear - startingYear + 1) + startingYear;
-        int dayOfYear = random.nextInt(365) + 1;
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
-        return String.format("%1$tF", calendar);
-    }
-
-    private String selectUserRegistrationDate(String userBirthday) {
-        String[] userBirthdayArray = userBirthday.split("-");
-
-        int birthYear = Integer.parseInt(userBirthdayArray[0]);
-
-        int registrationYear = birthYear + new Random().nextInt(2023 - birthYear + 1);
-        int dayOfYear = new Random().nextInt(365) + 1;
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.YEAR, registrationYear);
-        calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
-        return String.format("%1$tF", calendar);
-    }
-
-    private String selectUserStartingSubscriptionDate(String userRegistrationDate) {
-        String[] userRegistrationDateArray = userRegistrationDate.split("-");
-
-        int year = Integer.parseInt(userRegistrationDateArray[0]);
-
-        Random random = new Random();
-        int yearOffset = Math.max(0, random.nextInt(2024 - year + 1)); // Assurez-vous que l'offset ne soit pas négatif.
-        int dayOfYear = random.nextInt(365) + 1;
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.YEAR, year + yearOffset);
-        calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
-        return String.format("%1$tF", calendar);
-    }
-
-    private String selectUserLastPurchaseDate(int minYear, int maxYear) {
-        Random random = new Random();
-        int year = random.nextInt(maxYear - minYear + 1) + minYear;
-        int dayOfYear = random.nextInt(365) + 1;
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
-        return String.format("%1$tF", calendar);
-    }
-
-    private String selectUserEndingSubscriptionDate(String userStartingSubscriptionDate) {
-        String[] userStartingSubscriptionDateArray = userStartingSubscriptionDate.split("-");
-
-        int year = Integer.parseInt(userStartingSubscriptionDateArray[0]);
-
-        Random random = new Random();
-        int yearOffset = Math.max(0, random.nextInt((year + 3) - year + 1));
-        int dayOfYear = random.nextInt(365) + 1;
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.YEAR, year + yearOffset);
-        calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-
-        return String.format("%1$tF", calendar);
-    }
-
-
-    private int selectRandomIndex(int maxIndex) {
-        Random random = new Random();
-        return random.nextInt(maxIndex);
-    }
-
-    private String selectUserAddress(){
-        String[] userAdressArray = {
-                "Rue des Orfèvres", "Avenue de la République", "Boulevard de la Liberté",
-                "Rue des Dames", "Avenue du Général Leclerc", "Boulevard Saint-Germain",
-                "Rue de la Paix", "Avenue de Wagram", "Boulevard Haussmann",
-                "Rue du Bac", "Avenue des Champs-Élysées", "Boulevard Montmartre",
-                "Rue de Rivoli", "Avenue de l'Opéra", "Boulevard Saint-Michel",
-                "Rue du Faubourg Saint-Antoine", "Avenue Foch", "Boulevard de Magenta",
-                "Rue de Vaugirard", "Avenue George V", "Boulevard Malesherbes",
-                "Rue de Passy", "Avenue Montaigne", "Boulevard de la Chapelle",
-                "Rue La Fayette", "Avenue de la Bourdonnais", "Boulevard de Sébastopol",
-                "Rue du Cherche-Midi", "Avenue de Clichy", "Boulevard de la Villette",
-                "Rue Saint-Antoine", "Avenue de Friedland", "Boulevard de la Madeleine"
-        };
-
-        int randomIndex = selectRandomIndex(15);
-        return userAdressArray[randomIndex] + " " + selectRandomIndex(100);
-    }
-
-    private String selectUserCity() {
-
-        /*
-            Faire en sorte que la ville soit bien dans le bon code postal
-         */
-
-        String[] userCityArray = {
-                "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier",
-                "Strasbourg", "Bordeaux", "Lille", "Rennes", "Reims", "Le Havre", "Saint-Étienne",
-                "Toulon", "Grenoble", "Dijon", "Angers", "Nîmes", "Villeurbanne", "Le Mans",
-                "Aix-en-Provence", "Clermont-Ferrand", "Brest", "Limoges", "Tours", "Amiens",
-                "Perpignan", "Metz", "Besançon", "Boulogne-Billancourt", "Orléans", "Mulhouse",
-                "Rouen", "Caen", "Nancy", "Saint-Denis", "Saint-Denis", "Argenteuil", "Montreuil",
-                "Roubaix", "Dunkerque", "Tourcoing", "Nanterre", "Avignon", "Créteil", "Poitiers",
-                "Versailles", "Courbevoie", "Vitry-sur-Seine", "Colombes", "Pau", "Aulnay-sous-Bois",
-                "Asnières-sur-Seine", "Rueil-Malmaison", "Saint-Pierre", "Antibes", "Saint-Maur-des-Fossés",
-                "Champigny-sur-Marne", "La Rochelle", "Aubervilliers", "Calais", "Cannes", "Le Tampon",
-                "Béziers", "Colmar", "Bourges", "Drancy", "Mérignac", "Saint-Nazaire", "Valence",
-                "Ajaccio", "Issy-les-Moulineaux", "Noisy-le-Grand", "Villeneuve-d'Ascq", "Quimper",
-                "Antony", "Troyes", "Neuilly-sur-Seine", "La Seyne-sur-Mer", "Les Abymes", "Lorient",
-                "Sarcelles", "Pessac", "Ivry-sur-Seine", "Cergy", "Clichy", "Niort", "Chambéry", "Montauban",
-                "Vénissieux", "Beauvais", "Hyères", "Charleville-Mézières", "Cholet", "Chelles", "Meaux",
-                "Épinay-sur-Seine", "Saint-André", "La Roche-sur-Yon", "Bondy", "Levallois-Perret", "Issy-les-Moulineaux",
-                "Évry-Courcouronnes", "Arles", "Valenciennes", "Cagnes-sur-Mer", "Bobigny", "Corbeil-Essonnes",
-                "Saint-Quentin", "Pantin", "Maisons-Alfort", "Chalon-sur-Saône", "Meudon", "Fontenay-sous-Bois",
-                "Châteauroux", "Saint-Joseph", "Narbonne", "Saint-Louis", "Saint-Paul", "Albi", "Villejuif",
-        };
-
-        int randomIndex = selectRandomIndex(15);
-        return userCityArray[randomIndex];
-    }
-
-    private String selectUserPostalCode(){
-        return String.valueOf(selectRandomIndex(9999)) + 1;
-    }
-
-    private String selectUserLastname(){
-        String[] userLastnameArray = {
-                "RAMSAY", "CHILD", "BOCUSE", "LAWSON", "OLIVER", "STEWART", "RAY", "BATALI",
-                "HERMÉ", "KELLER", "DUCASSE", "ROBUCHON", "FIERI", "BOULUD", "PUCK", "BLUMENTHAL",
-                "REDZEPI", "ADRIÀ", "BOTTURA", "BOURDAIN", "CRENN", "PÉPIN", "AUGUSTE", "SAFFITZ",
-                "OTTOLENGHI", "PIERREWHITE", "FLAY", "DE LAURENTIIS", "GARTEN", "SAMUELSSON"
-        };
-
-        int randomIndex = selectRandomIndex(15);
-        return userLastnameArray[randomIndex];
-    }
-
-    private String selectUserFirstname(){
-        String[] userFirstnameArray = {
-                "Gordon", "Julia", "Paul", "Nigella", "Jamie", "Martha", "Rachel", "Mario", "Pierre",
-                "Thomas", "Alain", "Joël", "Guy", "Daniel", "Wolfgang", "Heston", "René",
-                "Ferran", "Massimo", "Anthony", "Dominique", "Jacques", "Georges",
-                "Claire", "Yotam", "Marco", "Bobby", "Giada", "Ina", "Marcus"
-        };
-
-        int randomIndex = selectRandomIndex(15);
-        return userFirstnameArray[randomIndex];
-    }
 
     private String selectUserEmail(String fisrtname, String lastname){
         String[] userMailArray = {
                 "gmail.com", "yahoo.fr", "hotmail.fr", "outlook.fr", "orange.fr", "sfr.fr", "free.fr"
         };
 
-        int randomIndex = selectRandomIndex(6);
+        int randomIndex = CommonDataGenerator.selectRandomInt(0, 6);
         return fisrtname + "." + lastname + "@" + userMailArray[randomIndex];
     }
 
@@ -323,6 +148,6 @@ public class DataGenerateUser {
     }
 
     private String selectUserName(String firstname, String lastname){
-        return firstname.substring(1) + lastname + selectRandomIndex(999);
+        return firstname.substring(1) + lastname + CommonDataGenerator.selectRandomInt(USER_MIN_NICKNAME_NUMBER, USER_MAX_NICKNAME_NUMBER);
     }
 }

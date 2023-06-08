@@ -1,11 +1,25 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.ProductsModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DataGenerateProduct {
+
+    private static final int PRODUCT_MIN_CATEGORY = 0;
+    private static final int PRODUCT_MAX_CATEGORY = 3;
+    private static final int PRODUCT_STOCK_MIN_STATE = 0;
+    private static final int PRODUCT_STOCK_MAX_STATE = 200;
+    private static final int PRODUCT_CATEGORY_0_COST_MIN = 10;
+    private static final int PRODUCT_CATEGORY_0_COST_MAX = 35;
+    private static final int PRODUCT_CATEGORY_1_COST_MIN = 30;
+    private static final int PRODUCT_CATEGORY_1_COST_MAX = 50;
+    private static final int PRODUCT_CATEGORY_2_COST_MIN = 20;
+    private static final int PRODUCT_CATEGORY_2_COST_MAX = 40;
+    private static final int PRODUCT_PAN_CATEGORY = 1;
+    private static final int PRODUCT_KNIFE_CATEGORY = 0;
 
     private final String dbName;
     private final String userName;
@@ -19,12 +33,12 @@ public class DataGenerateProduct {
 
     public void generateProducts(int i) throws SQLException {
 
-        int productCategory = selectRandomCategory();
+        int productCategory = CommonDataGenerator.selectRandomInt(PRODUCT_MIN_CATEGORY, PRODUCT_MAX_CATEGORY);
         String productTitle = selectRandomTitle(productCategory);
         String productDescription = selectRandomDescription(productCategory);
 
         int productCost = selectRandomProductCost(productCategory);
-        int productStockState = selectRandomStockState();
+        int productStockState = CommonDataGenerator.selectRandomInt(PRODUCT_STOCK_MIN_STATE, PRODUCT_STOCK_MAX_STATE);
 
         String sql = "INSERT INTO PRODUCTS(Title, Cost, Description, Category, Stock_state) VALUES (?, ?, ?, ?, ?)";
 
@@ -43,11 +57,6 @@ public class DataGenerateProduct {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private int selectRandomCategory(){
-        int randomInt = (int) (Math.random() * 3);
-        return randomInt;
     }
 
     private String selectRandomTitle(int productCategory){
@@ -90,10 +99,10 @@ public class DataGenerateProduct {
                 "Moule à savarin"
         };
 
-        if(productCategory == 0){
+        if(productCategory == PRODUCT_KNIFE_CATEGORY){
             int randomIndex = (int) (Math.random() * typeOfKnifeTitle.length);
             return typeOfKnifeTitle[randomIndex];
-        } else if(productCategory == 1){
+        } else if(productCategory == PRODUCT_PAN_CATEGORY){
             int randomIndex = (int) (Math.random() * typeOfPanTitle.length);
             return typeOfPanTitle[randomIndex];
         } else {
@@ -142,10 +151,10 @@ public class DataGenerateProduct {
                 "Offre un excellent démoulage pour une présentation parfaite."
         };
 
-        if(productCategory == 0){
+        if(productCategory == PRODUCT_KNIFE_CATEGORY){
             int randomIndex = (int) (Math.random() * typeOfKnifeDescription.length);
             return typeOfKnifeDescription[randomIndex];
-        } else if(productCategory == 1){
+        } else if(productCategory == PRODUCT_PAN_CATEGORY){
             int randomIndex = (int) (Math.random() * typeOfPanDescription.length);
             return typeOfPanDescription[randomIndex];
         } else {
@@ -155,20 +164,15 @@ public class DataGenerateProduct {
     }
 
     private int selectRandomProductCost(int productCategory){
-        if(productCategory == 0){
-            int randomIndex = (int) (Math.random() * (50 - 10) + 10);
+        if(productCategory == PRODUCT_KNIFE_CATEGORY){
+            int randomIndex = (int) (Math.random() * (PRODUCT_CATEGORY_0_COST_MAX - PRODUCT_CATEGORY_0_COST_MIN) + PRODUCT_CATEGORY_0_COST_MIN);
             return randomIndex;
-        } else if(productCategory == 1){
-            int randomIndex = (int) (Math.random() * (35 - 20) + 20);
+        } else if(productCategory == PRODUCT_PAN_CATEGORY){
+            int randomIndex = (int) (Math.random() * (PRODUCT_CATEGORY_1_COST_MAX - PRODUCT_CATEGORY_1_COST_MIN) + PRODUCT_CATEGORY_1_COST_MIN);
             return randomIndex;
         } else {
-            int randomIndex = (int) (Math.random() * (15 - 3) + 3);
+            int randomIndex = (int) (Math.random() * (PRODUCT_CATEGORY_2_COST_MAX - PRODUCT_CATEGORY_2_COST_MIN) + PRODUCT_CATEGORY_2_COST_MIN);
             return randomIndex;
         }
-    }
-
-    private int selectRandomStockState(){
-        int randomIndex = (int) (Math.random() * 200);
-        return randomIndex;
     }
 }

@@ -1,11 +1,17 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.BillsModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DataGenerateBill {
+
+    private static final int BILL_TEMP_MINIMUM_COST = 2;
+    private static final int BILL_TEMP_MAXIMUM_COST = 2000;
+    private static final String BILL_TEMP_STARTING_DATE = "1980-01-01";
+    private static final String BILL_TEMP_CONTENT = "Event";
 
     private final String dbName;
     private final String userName;
@@ -20,7 +26,7 @@ public class DataGenerateBill {
     public void generateBills(int i) throws SQLException{
 
         //Reprendre le cout d'un événement, d'un abonnement ou d'un produit
-        int billCostOfPurchase = selectTempCostOfPurchase();
+        int billCostOfPurchase = CommonDataGenerator.selectRandomInt(BILL_TEMP_MINIMUM_COST, BILL_TEMP_MAXIMUM_COST);
 
         //Faire date le jour de fin d'un événements et après date inscription utilisateur
         //Faire date début d'abonnement et après inscription utilisateur
@@ -30,10 +36,10 @@ public class DataGenerateBill {
         String billPurchaseContent = selectTempPurchaseContent();
 
         //Reprendre l'utilisateur qui a acheté l'évènement, l'abonnement ou le produit
-        String billFirstnameOfBuyer = selectTempFirstnameOfBuyer();
-        String billLastnameOfBuyer = selectTempLastnameOfBuyer();
-        String billPostalCodeOfBuyer = selectTempPostalCodeOfBuyer();
-        String billAddressOfBuyer = selectTempAddressOfBuyer();
+        String billFirstnameOfBuyer = CommonDataGenerator.selectRandomFirstname();
+        String billLastnameOfBuyer = CommonDataGenerator.selectRandomLastname();
+        String billPostalCodeOfBuyer = CommonDataGenerator.selectRandomPostalCode();
+        String billAddressOfBuyer = CommonDataGenerator.selectRandomAdress();
 
 
         String sql = "INSERT INTO BILLS(Purchase_content, Purchase_date, Firstname_of_buyer, Lastname_of_buyer, Postal_code_of_buyer, Address_of_buyer, Cost_of_purchase, Id_1) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -58,31 +64,11 @@ public class DataGenerateBill {
         }
     }
 
-    private int selectTempCostOfPurchase() {
-        return 0;
-    }
-
     private String selectTempPurchaseDate() {
-        return "1999-01-01";
+        return BILL_TEMP_STARTING_DATE;
     }
 
     private String selectTempPurchaseContent() {
-        return "Event";
-    }
-
-    private String selectTempFirstnameOfBuyer() {
-        return "Firstname";
-    }
-
-    private String selectTempLastnameOfBuyer() {
-        return "Lastname";
-    }
-
-    private String selectTempPostalCodeOfBuyer() {
-        return "00000";
-    }
-
-    private String selectTempAddressOfBuyer() {
-        return "Address";
+        return BILL_TEMP_CONTENT;
     }
 }

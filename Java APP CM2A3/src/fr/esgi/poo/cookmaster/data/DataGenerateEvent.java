@@ -1,14 +1,29 @@
-package fr.esgi.poo.cookmaster.main;
+package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.EventsModel;
+import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
+import fr.esgi.poo.cookmaster.tools.CommonSettings;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Random;
 import java.time.LocalDate;
 
-
 public class DataGenerateEvent {
+
+    private static final int RANDOM_INDEX_MIN = 0;
+    private static final int ENDING_YEAR_OFF = 1;
+    private static final int EVENT_STATE_ONGOING = 1;
+    private static final int EVENT_STATE_PAST = 2;
+    private static final int EVENT_STATE_NOT_STARTED = 0;
+    private static final int EVENT_TYPE_GOURMET = 0;
+    private static final int EVENT_TYPE_CONFERENCE = 1;
+    private static final int EVENT_TYPE_ESCAPADE = 2;
+    private static final int EVENT_TYPE_EXPO = 3;
+    private static final int EVENT_TYPE_OTHERS = 4;
+    private static final String EVENT_TITLE_GOURMET = "Gourmet";
+    private static final String EVENT_TITLE_CONFERENCE = "Conference";
+    private static final String EVENT_TITLE_ESCAPADE = "Escapade";
+    private static final String EVENT_TITLE_EXPO = "Expo";
 
     private final String dbName;
     private final String userName;
@@ -21,13 +36,13 @@ public class DataGenerateEvent {
     }
 
     public void generateEvents(int i) throws SQLException {
-        int randomIndex = selectRandomIndex();
+        int randomIndex = CommonDataGenerator.selectRandomInt(RANDOM_INDEX_MIN, CommonSettings.ALL_ARRAY_SIZE);
         String eventTitle = selectEventTitle(randomIndex);
         String eventDescription = selectEventDescription(randomIndex);
 
         int eventType = selectEventType(eventTitle);
-        String eventStartingDate = selectEventStartingDate();
-        String eventEndingDate = selectEventEndingDate(eventStartingDate);
+        String eventStartingDate = CommonDataGenerator.selectRandomDate();
+        String eventEndingDate = CommonDataGenerator.selectRandomDate(eventStartingDate, ENDING_YEAR_OFF);
         int eventState = selectEventState(eventStartingDate, eventEndingDate);
 
         String sql = "INSERT INTO EVENTS(Type, Title, Description, State, Starting_date, Ending_date) VALUES (?, ?, ?, ?, ?, ?)";
@@ -47,11 +62,6 @@ public class DataGenerateEvent {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private int selectRandomIndex() {
-        Random random = new Random();
-        return random.nextInt(15);
     }
 
     private String selectEventTitle(int randomIndex) {
@@ -99,57 +109,18 @@ public class DataGenerateEvent {
     }
 
     private int selectEventType(String eventTitle) {
-        if (eventTitle.contains("Gourmet") || eventTitle.contains("Gala") || eventTitle.contains("Showdown")){
-            return 0;
-        } else if (eventTitle.contains("Escapade") || eventTitle.contains("Bonanza") || eventTitle.contains("Symposium")){
-            return 1;
-        } else if (eventTitle.contains("Unveiling") || eventTitle.contains("Festival") || eventTitle.contains("Fiesta")){
-            return 2;
-        } else if (eventTitle.contains("Expo") || eventTitle.contains("Conference") || eventTitle.contains("Assembly") || eventTitle.contains("Display")){
-            return 3;
+        if (eventTitle.contains(EVENT_TITLE_GOURMET)){
+            return EVENT_TYPE_GOURMET;
+        } else if (eventTitle.contains(EVENT_TITLE_ESCAPADE)){
+            return EVENT_TYPE_ESCAPADE;
+        } else if (eventTitle.contains(EVENT_TITLE_CONFERENCE)){
+            return EVENT_TYPE_CONFERENCE;
+        } else if (eventTitle.contains(EVENT_TITLE_EXPO)){
+            return EVENT_TYPE_EXPO;
         } else {
-            return 4;
+            return EVENT_TYPE_OTHERS;
         }
     }
-
-    private String selectEventStartingDate() {
-        Random random = new Random();
-        int year = random.nextInt(4) + 2020;
-        int month = random.nextInt(12) + 1;
-        int day = random.nextInt(28) + 1;
-
-        return year + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
-    }
-
-    private String selectEventEndingDate(String eventStartingDate) {
-        String[] eventStartingDateArray = eventStartingDate.split("-");
-        int year = Integer.parseInt(eventStartingDateArray[0]);
-        int month = Integer.parseInt(eventStartingDateArray[1]);
-        int day = Integer.parseInt(eventStartingDateArray[2]);
-
-        Random random = new Random();
-        int yearOffset = random.nextInt(4) + 1;
-        int monthOffset = random.nextInt(3) + 1;
-        int dayOffset = random.nextInt(7) + 1;
-
-        if (day + dayOffset > 28) {
-            month += 1;
-            day = day + dayOffset - 28;
-        } else {
-            day += dayOffset;
-        }
-
-        if (month + monthOffset > 12) {
-            year += yearOffset + 1;
-            month = month + monthOffset - 12;
-        } else {
-            year += yearOffset;
-            month += monthOffset;
-        }
-
-        return year + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
-    }
-
 
     private int selectEventState(String eventStartingDate, String eventEndingDate) {
         LocalDate today = LocalDate.now();
@@ -157,12 +128,11 @@ public class DataGenerateEvent {
         LocalDate endEventDate = LocalDate.parse(eventEndingDate);
 
         if (today.isBefore(startEventDate)) {
-            return 0;
+            return EVENT_STATE_NOT_STARTED;
         } else if (today.isEqual(startEventDate) || (today.isAfter(startEventDate) && today.isBefore(endEventDate))) {
-            return 1;
+            return EVENT_STATE_ONGOING;
         } else {
-            return 2;
+            return EVENT_STATE_PAST;
         }
     }
-
 }
