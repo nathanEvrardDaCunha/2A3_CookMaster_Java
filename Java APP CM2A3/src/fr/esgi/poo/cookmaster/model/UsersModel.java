@@ -78,6 +78,18 @@ public class UsersModel extends Model {
         return this.user.getInt("Id_1");
     }
 
+    public String getUserCity() throws SQLException {
+        return this.user.getString("City");
+    }
+
+    public String getUserEmail() throws SQLException {
+        return this.user.getString("Email");
+    }
+
+    public String getUserPassword() throws SQLException {
+        return this.user.getString("Password");
+    }
+
     public void close() {
         try {
             if (this.user != null) {
@@ -86,6 +98,72 @@ public class UsersModel extends Model {
             super.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean userExistsWithNameBirthdate(String lastname, String firstname, String birthdate) {
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(
+                    "SELECT * FROM Users WHERE Lastname = ? AND Firstname = ? AND BirthDay = ?"
+            );
+            ps.setString(1, lastname);
+            ps.setString(2, firstname);
+            ps.setString(3, birthdate);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean userExistsWithNameAddress(String lastname, String firstname, String city, String address, String postalCode) {
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(
+                    "SELECT * FROM Users WHERE Lastname = ? AND Firstname = ? AND City = ? AND Address = ? AND Postal_code = ?"
+            );
+            ps.setString(1, lastname);
+            ps.setString(2, firstname);
+            ps.setString(3, city);
+            ps.setString(4, address);
+            ps.setString(5, postalCode);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean userExistsWithEmail(String email) {
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(
+                    "SELECT * FROM Users WHERE Email = ?"
+            );
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean userExistsWithUsername(String username) {
+        try {
+            PreparedStatement ps = getConnection().prepareStatement(
+                    "SELECT * FROM Users WHERE Username = ?"
+            );
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

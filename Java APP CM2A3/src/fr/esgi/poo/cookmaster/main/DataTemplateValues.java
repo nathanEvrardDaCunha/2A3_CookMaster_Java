@@ -17,31 +17,46 @@ public class DataTemplateValues {
     };
 
     public String[] eventDescriptionsArray = {
-            "Rejoignez-nous pour une journée de délices culinaires, où les meilleurs chefs locaux montreront leurs talents.",
-            "Participez à notre atelier de pâtisserie et apprenez à créer de superbes desserts.",
-            "Venez déguster les meilleurs vins de la région, sélectionnés par nos sommeliers experts.",
-            "L'événement parfait pour les amateurs de cuisine française, avec des plats préparés par des chefs étoilés.",
-            "Un événement dédié à la découverte des merveilles de la cuisine végétarienne, parfait pour les amateurs de légumes.",
-            "Participez à notre conférence sur la nutrition et apprenez comment manger de manière saine et équilibrée.",
-            "Rejoignez notre soirée sushi et savourez des sushis frais préparés par nos talentueux chefs de sushi.",
-            "Participez à notre concours de barbecue et montrez vos compétences en matière de grillades.",
-            "Un événement pour tous les amateurs de bière, avec une sélection des meilleures bières artisanales.",
-            "Assistez à notre défi de cuisine rapide et découvrez comment préparer un repas délicieux en un temps record.",
-            "Apprenez les secrets de la cuisine méditerranéenne dans notre cours dédié.",
-            "Venez découvrir le monde du thé dans notre exposition, avec une variété de thés du monde entier.",
-            "Participez à notre atelier de préparation de café et apprenez à faire un parfait expresso.",
-            "Venez célébrer la cuisine de rue dans notre festival, avec des plats de tous les coins du globe.",
-            "Apprenez à cuisiner pour vos enfants dans notre atelier dédié, avec des recettes saines et délicieuses.",
-            "Rejoignez notre tournoi de création de burger et montrez vos talents culinaires.",
-            "Venez découvrir le monde du fromage dans notre dégustation, avec une sélection des meilleurs fromages du monde.",
-            "Participez à notre conférence sur la cuisine durable et apprenez comment cuisiner de manière respectueuse de l'environnement.",
-            "Rejoignez notre exposition de cuisine végétalienne et découvrez comment créer des plats savoureux sans produits d'origine animale.",
-            "Venez vous rafraîchir à notre festival de la crème glacée, avec une grande variété de saveurs.",
-            "Découvrez les secrets de la cuisine italienne dans notre semaine dédiée, avec des recettes traditionnelles.",
-            "Venez découvrir le monde fascinant de la cuisine moléculaire dans notre atelier dédié.",
-            "Participez à notre tournoi de préparation de sandwich et montrez vos talents culinaires.",
-            "Apprenez à cuisiner comme les Thaïlandais dans notre cours de cuisine thaïlandaise."
+            "Rejoignez nous pour une journée de délices culinaires où les meilleurs chefs locaux montreront leurs talents",
+            "Participez à notre atelier de pâtisserie et apprenez à créer de superbes desserts",
+            "Venez déguster les meilleurs vins de la région sélectionnés par nos sommeliers experts",
+            "L événement parfait pour les amateurs de cuisine française avec des plats préparés par des chefs étoilés",
+            "Un événement dédié à la découverte des merveilles de la cuisine végétarienne parfait pour les amateurs de légumes",
+            "Participez à notre conférence sur la nutrition et apprenez comment manger de manière saine et équilibrée",
+            "Rejoignez notre soirée sushi et savourez des sushis frais préparés par nos talentueux chefs de sushi",
+            "Participez à notre concours de barbecue et montrez vos compétences en matière de grillades",
+            "Un événement pour tous les amateurs de bière avec une sélection des meilleures bières artisanales",
+            "Assistez à notre défi de cuisine rapide et découvrez comment préparer un repas délicieux en un temps record",
+            "Apprenez les secrets de la cuisine méditerranéenne dans notre cours dédié",
+            "Venez découvrir le monde du thé dans notre exposition avec une variété de thés du monde entier",
+            "Participez à notre atelier de préparation de café et apprenez à faire un parfait expresso",
+            "Venez célébrer la cuisine de rue dans notre festival avec des plats de tous les coins du globe",
+            "Apprenez à cuisiner pour vos enfants dans notre atelier dédié avec des recettes saines et délicieuses",
+            "Rejoignez notre tournoi de création de burger et montrez vos talents culinaires",
+            "Venez découvrir le monde du fromage dans notre dégustation avec une sélection des meilleurs fromages du monde",
+            "Participez à notre conférence sur la cuisine durable et apprenez comment cuisiner de manière respectueuse de lenvironnement",
+            "Rejoignez notre exposition de cuisine végétalienne et découvrez comment créer des plats savoureux sans produits dorigine animale",
+            "Venez vous rafraîchir à notre festival de la crème glacée avec une grande variété de saveurs",
+            "Découvrez les secrets de la cuisine italienne dans notre semaine dédiée avec des recettes traditionnelles",
+            "Venez découvrir le monde fascinant de la cuisine moléculaire dans notre atelier dédié",
+            "Participez à notre tournoi de préparation de sandwich et montrez vos talents culinaires",
+            "Apprenez à cuisiner comme les Thaïlandais dans notre cours de cuisine thaïlandaise",
+            "Rejoignez notre exposition de cuisine végétalienne et découvrez comment créer des plats savoureux sans produits dorigine animale",
+            "Venez vous rafraîchir à notre festival de la crème glacée avec une grande variété de saveurs",
+            "Découvrez les secrets de la cuisine italienne dans notre semaine dédiée avec des recettes traditionnelles",
+            "Venez découvrir le monde fascinant de la cuisine moléculaire dans notre atelier dédié",
+            "Participez à notre tournoi de préparation de sandwich et montrez vos talents culinaires",
+            "Apprenez à cuisiner comme les Thaïlandais dans notre cours de cuisine thaïlandaise",
+            "Rejoignez notre exposition de cuisine végétalienne et découvrez comment créer des plats savoureux sans produits dorigine animale",
+            "Venez vous rafraîchir à notre festival de la crème glacée avec une grande variété de saveurs",
+            "Découvrez les secrets de la cuisine italienne dans notre semaine dédiée avec des recettes traditionnelles",
+            "Venez découvrir le monde fascinant de la cuisine moléculaire dans notre atelier dédié",
+            "Participez à notre tournoi de préparation de sandwich et montrez vos talents culinaires",
+            "Apprenez à cuisiner comme les Thaïlandais dans notre cours de cuisine thaïlandaise"
     };
+
+
+
 
     public int[] eventStatesArray = {
             0, 1, 2
@@ -108,13 +123,14 @@ public class DataTemplateValues {
     };
 
     public String[] equipmentTitlesArray = {
-            "COUTEAU À TRANCHER", "COUTEAU À DÉCOUPER", "COUTEAU À PAIN", "COUTEAU DE CHEF", "COUTEAU D'OFFICE",
-            "POÊLE", "CASSEROLE", "FAITOUT", "MOULE À GÂTEAU", "BATTEUR ÉLECTRIQUE", "ROBOT CULINAIRE",
-            "PLAN DE TRAVAIL", "RÂPE À FROMAGE", "PRESSE-AGRUMES", "MOULE À TARTES", "SALADIER",
-            "THERMOMÈTRE DE CUISINE", "CUIT-VAPEUR", "GRILLE-PAIN", "BOUILLOIRE", "CAFETIÈRE",
-            "FOUET", "PLAT À FOUR", "PLANCHA", "COUPE-LEGUMES", "MACHINE À PÂTES",
-            "HACHOIR À VIANDE", "GRILL", "MIXEUR", "ESSOREUSE À SALADE", "SOUPIÈRE"
+            "COUTEAU A TRANCHER", "COUTEAU A DECOUPER", "COUTEAU A PAIN", "COUTEAU DE CHEF", "COUTEAU D'OFFICE",
+            "POELE", "CASSEROLE", "FAITOUT", "MOULE A GATEAU", "BATTEUR ELECTRIQUE", "ROBOT CULINAIRE",
+            "PLAN DE TRAVAIL", "RAPE A FROMAGE", "PRESSE-AGRUMES", "MOULE A TARTES", "SALADIER",
+            "THERMOMETRE DE CUISINE", "CUIT-VAPEUR", "GRILLE-PAIN", "BOUILLOIRE", "CAFETIERE",
+            "FOUET", "PLAT A FOUR", "PLANCHA", "COUPE-LEGUMES", "MACHINE A PATES",
+            "HACHOIR A VIANDE", "GRILL", "MIXEUR", "ESSOREUSE A SALADE", "SOUPIERE"
     };
+
 
     public String[] equipmentBrandsArray = {
             "KITCHENAID", "BREVILLE", "CUISINART", "HAMILTON BEACH", "WILFA", "BOSCH", "BLACK+DECKER",
@@ -124,10 +140,96 @@ public class DataTemplateValues {
             "SIEMENS", "AEG", "ELECTROLUX"
     };
 
+    public String[] equipmentDescriptionArray = {
+            "Utilisé pour trancher les rôtis et autres viandes cuites",
+            "Utilisé pour découper les viandes et les volailles",
+            "Utilisé pour couper les pains à croûte dure",
+            "Le couteau de cuisine universel",
+            "Utilisé pour les tâches de précision en cuisine",
+            "Idéale pour faire sauter les aliments",
+            "Utilisée pour mijoter ou réchauffer les aliments",
+            "Idéal pour cuisiner de grandes quantités",
+            "Utilisé pour cuire les gâteaux",
+            "Utile pour mélanger rapidement les ingrédients",
+            "Aide à hacher, couper et mélanger de nombreux aliments",
+            "Fournit un espace de travail propre pour préparer les aliments",
+            "Parfait pour râper le fromage",
+            "Idéal pour extraire le jus des agrumes",
+            "Utilisé pour cuire les tartes",
+            "Idéal pour mélanger et servir les salades",
+            "Utilisé pour mesurer la température de cuisson des aliments",
+            "Aide à cuire les aliments à la vapeur",
+            "Utile pour toaster le pain",
+            "Idéale pour chauffer l'eau",
+            "Utilisée pour préparer le café",
+            "Idéal pour mélanger les ingrédients",
+            "Utilisé pour la cuisson au four",
+            "Idéale pour la cuisson à haute température",
+            "Parfait pour couper les légumes rapidement",
+            "Aide à faire des pâtes maison",
+            "Utile pour hacher la viande",
+            "Idéal pour la cuisson à la grillade",
+            "Aide à mélanger les aliments de manière homogène",
+            "Idéale pour sécher la salade après le lavage",
+            "Parfait pour servir la soupe"
+    };
+
+
+
+
+    /* PUBLICATION */
+
+    public String[] publicationTitlesArray = {
+            "À la recherche de la meilleure recette de lasagne",
+            "Comment réussir à tous les coups sa pâte à choux ?",
+            "Les épices incontournables pour une cuisine indienne authentique",
+            "Qui a déjà essayé de faire son propre pain au levain ?",
+            "Besoin de conseils pour un menu végétalien",
+            "Découverte incroyable : la cuisson sous vide à la maison !",
+            "Quel est votre dessert préféré à préparer ?",
+            "Comment choisir le bon vin pour accompagner votre repas",
+            "Idées de plats à base de légumes d'hiver",
+            "Ratage de mon premier soufflé - des conseils ?",
+            "Astuce pour une crème brûlée parfaite",
+            "Où trouver de bons ingrédients pour la cuisine japonaise ?",
+            "Vos meilleures recettes de gâteaux pour les anniversaires",
+            "Café ou thé - quel est votre préféré pour commencer la journée ?",
+            "Qui a une bonne recette de ramen à partager ?",
+            "Quels sont vos meilleurs livres de cuisine ?",
+            "Conseils pour faire des macarons maison",
+            "Besoin d'idées pour un dîner entre amis",
+            "Recettes faciles et rapides pour les jours de semaine",
+            "Quel est le meilleur ustensile de cuisine que vous ayez jamais acheté ?"
+    };
+
+    public String[] publicationDescriptionsArray = {
+            "Je suis à la recherche de la meilleure recette de lasagne. Quels sont vos conseils et astuces?",
+            "La pâte à choux reste un mystère pour moi. Comment la réussir à tous les coups?",
+            "Je débute en cuisine indienne et je cherche les épices incontournables pour être authentique. Des suggestions?",
+            "J'ai décidé de faire mon propre pain au levain. Quels sont vos conseils pour les débutants?",
+            "Je prépare un menu végétalien pour la première fois. Quels sont vos plats favoris?",
+            "J'ai récemment découvert la cuisson sous vide. Qui a déjà essayé à la maison? Partagez vos expériences!",
+            "Je suis curieux de connaître votre dessert préféré à préparer. Partagez vos recettes préférées!",
+            "Je me demande souvent comment choisir le bon vin pour accompagner mon repas. Des conseils?",
+            "Je suis à la recherche d'idées de plats à base de légumes d'hiver. Quelles sont vos recettes favorites?",
+            "J'ai tenté de faire mon premier soufflé et c'était un désastre. Des conseils pour éviter un nouveau ratage?",
+            "Je suis à la recherche de l'astuce ultime pour une crème brûlée parfaite. Pouvez-vous m'aider?",
+            "Je souhaite cuisiner japonais mais je ne sais pas où trouver de bons ingrédients. Des recommandations?",
+            "Je cherche de nouvelles recettes de gâteaux pour les anniversaires. Quels sont vos favoris?",
+            "Café ou thé, quel est votre préféré pour commencer la journée et pourquoi?",
+            "J'adore les ramens et je voudrais essayer de les faire moi-même. Qui a une bonne recette à partager?",
+            "Je suis toujours à la recherche de bons livres de cuisine. Quels sont vos meilleurs?",
+            "Je veux essayer de faire des macarons maison. Des conseils pour une débutante?",
+            "Je prépare un dîner entre amis ce week-end et je cherche des idées. Que me suggérez-vous?",
+            "Je cherche des recettes faciles et rapides pour les jours de semaine. Quels sont vos go-tos?",
+            "Je suis curieux de savoir quel est le meilleur ustensile de cuisine que vous ayez jamais acheté et pourquoi?"
+    };
+
+
 
 
     /* SUBSCRIPTION */
-
+/*
     public int[] subscriptionFrequencyOfCostsArray = {
             0, 30, 90, 365
     };
@@ -145,11 +247,14 @@ public class DataTemplateValues {
     };
 
     public String[] subscriptionDescriptionsArray = {
-            "Abonnement Visiteur : idéal pour les débutants en cuisine, permet l'accès à une sélection de recettes basiques.",
-            "Abonnement Abonné : pour les passionnés de cuisine, offre l'accès à toutes les recettes standard et à des tutoriels vidéo réguliers.",
-            "Abonnement Premium : destiné aux gourmets, offre l'accès à toutes les recettes, aux tutoriels vidéo, et à des événements culinaires en direct.",
-            "Abonnement Grand Chef : pour les professionnels et les aspirants chefs, offre un accès complet aux recettes, aux tutoriels, aux événements en direct, ainsi qu'à des cours exclusifs de chefs étoilés."
+            "test",
+            "deuxtest",
+            "troistest",
+            "quatretest"
     };
+
+
+
 
 
 

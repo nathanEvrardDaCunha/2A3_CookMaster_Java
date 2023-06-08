@@ -75,6 +75,26 @@ public class EquipmentsModel extends Model {
         }
     }
 
+    public int equipmentCostExist(String equipmentTitle, String equipmentBrand) throws SQLException {
+        String query ="SELECT Cost FROM equipments WHERE Title = ? AND Brand = ?";
+        PreparedStatement stmt = getConnection().prepareStatement(query);
+        stmt.setString(1, equipmentTitle);
+        stmt.setString(2, equipmentBrand);
+
+        ResultSet rs = stmt.executeQuery();
+        return rs.getInt("Cost");
+    }
+
+    public int equipmentTypeExist(String equipmentTitle, String equipmentBrand) throws SQLException {
+        String query ="SELECT Type FROM equipments WHERE Title = ? AND Brand = ?";
+        PreparedStatement stmt = getConnection().prepareStatement(query);
+        stmt.setString(1, equipmentTitle);
+        stmt.setString(2, equipmentBrand);
+
+        ResultSet rs = stmt.executeQuery();
+        return rs.getInt("Type");
+    }
+
     @Override
     public String getTableName() {
         return "equipments";

@@ -93,6 +93,25 @@ public class ProvidersModel extends Model {
         }
     }
 
+    public boolean providerExists(String firstname, String lastname, String companyName, int type) throws SQLException {
+        String query = "SELECT COUNT(*) FROM PROVIDERS WHERE Firstname = ? AND Lastname = ? AND Provider_compagny_name = ? AND Type = ?";
+        PreparedStatement stmt = getConnection().prepareStatement(query);
+        stmt.setString(1, firstname);
+        stmt.setString(2, lastname);
+        stmt.setString(3, companyName);
+        stmt.setInt(4, type);
+
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            return count > 0;
+        }
+
+        return false;
+    }
+
+
     @Override
     public String getTableName() {
         return "providers";

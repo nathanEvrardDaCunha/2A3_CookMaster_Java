@@ -48,6 +48,15 @@ public class EventsLocationModel extends Model {
         }
     }
 
+    public String getEventLocationCity() {
+        try {
+            return this.eventLocation.getString("City");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public int getEventLocationCost() {
         try {
             return this.eventLocation.getInt("Cost");

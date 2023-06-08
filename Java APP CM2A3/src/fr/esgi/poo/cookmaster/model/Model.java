@@ -20,7 +20,7 @@ abstract class Model {
         return "";
     }
 
-
+    //CHANGER POUR QUIL NE RESTE QUE LA PREPARET STATEMENT
     public ResultSet executeQuery(String query) {
         try {
             Statement statement = this.connection.createStatement();
@@ -31,6 +31,7 @@ abstract class Model {
         }
     }
 
+    //CHANGER POUR QUIL NE RESTE QUE LA PREPARET STATEMENT
     public int executeUpdate(String query) {
         try {
             Statement statement = this.connection.createStatement();
@@ -40,6 +41,21 @@ abstract class Model {
             return -1;
         }
     }
+
+    public int executeUpdate(PreparedStatement pstmt) {
+        try {
+            return pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+
+    public Connection getConnection() {
+        return this.connection;
+    }
+
 
     public void purge() {
         // Delete all rows from the table
