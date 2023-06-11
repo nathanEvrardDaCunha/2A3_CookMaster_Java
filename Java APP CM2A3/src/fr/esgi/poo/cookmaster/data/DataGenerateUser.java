@@ -11,15 +11,15 @@ import java.util.Base64;
 public class DataGenerateUser {
 
     private static final String USER_BIRTHDAY_DATE_MIN = "1980-01-01";
-    private static final int USER_BIRTHDAY_YEARS_OFFSET_MAX = 24;
+    private static final String USER_BIRTHDAY_DATE_MAX = "2002-12-31";
     private static final int USER_MIN_SEX = 0;
     private static final int USER_MAX_SEX = 2;
     private static final int USER_MIN_ROLE = 0;
     private static final int USER_MAX_ROLE = 2;
-    private static final int USER_REGISTRATION_YEARS_OFFSET_MAX = 24;
-    private static final int USER_STARTING_SUBSCRIPTION_YEARS_OFFSET_MAX = 2;
-    private static final int USER_LAST_PURCHASE_YEARS_OFFSET_MAX = 2;
-    private static final int USER_ENDING_SUBSCRIPTION_YEARS_OFFSET_MAX = 1;
+    private static final String USER_REGISTRATION_DATE_MAX = "2021-12-31";
+    private static final String USER_STARTING_SUBSCRIPTION_DATE_MAX = "2022-12-31";
+    private static final String USER_LAST_PURCHASE_DATE_MAX = "2023-12-31";
+    private static final String USER_ENDING_SUBSCRIPTION_DATE_MAX = "2024-12-31";
     private static final int USER_MIN_FIDELITY_POINT = 0;
     private static final int USER_MAX_FIDELITY_POINT = 1000;
     private static final int USER_MIN_NICKNAME_NUMBER = 0;
@@ -52,7 +52,7 @@ public class DataGenerateUser {
         String userName;
 
         do {
-            userBirthday = CommonDataGenerator.selectRandomDate(USER_BIRTHDAY_DATE_MIN, USER_BIRTHDAY_YEARS_OFFSET_MAX);
+            userBirthday = CommonDataGenerator.selectRandomDate(USER_BIRTHDAY_DATE_MIN, USER_BIRTHDAY_DATE_MAX);
             userFirstname = CommonDataGenerator.selectRandomFirstname();
             userLastname = CommonDataGenerator.selectRandomLastname();
 
@@ -72,15 +72,15 @@ public class DataGenerateUser {
         int userRole = CommonDataGenerator.selectRandomInt(USER_MIN_ROLE, USER_MAX_ROLE);
         int userFidelityPoint = CommonDataGenerator.selectRandomInt(USER_MIN_FIDELITY_POINT, USER_MAX_FIDELITY_POINT);
 
-        String userRegistrationDate = CommonDataGenerator.selectRandomDate(userBirthday, USER_REGISTRATION_YEARS_OFFSET_MAX);
+        String userRegistrationDate = CommonDataGenerator.selectRandomDate(userBirthday, USER_REGISTRATION_DATE_MAX);
 
-        String userStartingSubscriptionDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_STARTING_SUBSCRIPTION_YEARS_OFFSET_MAX);
-        String userLastPurchaseDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_LAST_PURCHASE_YEARS_OFFSET_MAX);
+        String userStartingSubscriptionDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_STARTING_SUBSCRIPTION_DATE_MAX);
+        String userLastPurchaseDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_LAST_PURCHASE_DATE_MAX);
 
         //Récupérer la fréquence de l'abonnement est l'ajouté a la date => En réalité je vais faire un UPDATE a cette utilisateur
         //durant le moment ou je créé la table des relation entre les abonnements et les utilisateurs pour que l'utilisateur (id: 1) soit abonné a l'abonnement (id: 1)
         //et ensuite je vais faire un UPDATE sur l'utilisateur (id: 1) pour lui ajouter la date de fin d'abonnement
-        String userEndingSubscriptionDate = CommonDataGenerator.selectRandomDate(userStartingSubscriptionDate, USER_ENDING_SUBSCRIPTION_YEARS_OFFSET_MAX);
+        String userEndingSubscriptionDate = CommonDataGenerator.selectRandomDate(userStartingSubscriptionDate, USER_ENDING_SUBSCRIPTION_DATE_MAX);
 
         String sql = "INSERT INTO USERS(Username, Address, City, Firstname, Lastname, Postal_code, Role, Registration_date, Fidelity_point, Last_purchase_date, Ending_subscription_date, Starting_subscription_date, Sex, Birthday, Email, Password, Id_1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 

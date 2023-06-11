@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class DataGenerateEvent {
 
     private static final int RANDOM_INDEX_MIN = 0;
-    private static final int ENDING_YEAR_OFF = 1;
+    private static final String ENDING_DATE = "2025-12-31";
     private static final int EVENT_STATE_ONGOING = 1;
     private static final int EVENT_STATE_PAST = 2;
     private static final int EVENT_STATE_NOT_STARTED = 0;
@@ -41,8 +41,8 @@ public class DataGenerateEvent {
         String eventDescription = selectEventDescription(randomIndex);
 
         int eventType = selectEventType(eventTitle);
-        String eventStartingDate = CommonDataGenerator.selectRandomDate();
-        String eventEndingDate = CommonDataGenerator.selectRandomDate(eventStartingDate, ENDING_YEAR_OFF);
+        String eventStartingDate = CommonDataGenerator.selectRandomDate("2020-01-01", "2022-12-31");
+        String eventEndingDate = CommonDataGenerator.selectRandomDate(eventStartingDate, ENDING_DATE);
         int eventState = selectEventState(eventStartingDate, eventEndingDate);
 
         String sql = "INSERT INTO EVENTS(Type, Title, Description, State, Starting_date, Ending_date) VALUES (?, ?, ?, ?, ?, ?)";

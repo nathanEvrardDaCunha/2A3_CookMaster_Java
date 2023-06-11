@@ -25,7 +25,7 @@ public class DataGeneratePublication {
 
         //PARTIE A REVOIR POUR ETRE SUR QUE CHAQUE CHOSE EST COHERENTE
         //Etre sûr que l'utilisateur qui publie est un utilisateur qui existe (donc vérifier date d'inscription)
-        String publicationDate = CommonDataGenerator.selectRandomDate();
+        String publicationDate = CommonDataGenerator.selectRandomDate("2020-01-01", "2022-12-31");
 
         int randomInt = CommonDataGenerator.selectRandomInt(RANDOM_INT_MIN, CommonSettings.ALL_ARRAY_SIZE);
         String publicationTitle = selectRandomPublicationTitle(randomInt);

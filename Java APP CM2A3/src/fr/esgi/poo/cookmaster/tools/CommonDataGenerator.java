@@ -1,6 +1,15 @@
 package fr.esgi.poo.cookmaster.tools;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CommonDataGenerator {
 
@@ -96,7 +105,21 @@ public class CommonDataGenerator {
         return userFirstnameArray[randomIndex];
     }
 
-    public static String selectRandomDate(String startingYear, int endingYearOff){
+    public static String selectRandomDate(String startDate, String endDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+        LocalDate startLocalDate = LocalDate.parse(startDate, formatter);
+        LocalDate endLocalDate = LocalDate.parse(endDate, formatter);
+
+        long randomDay = ThreadLocalRandom
+                .current()
+                .nextLong(ChronoUnit.DAYS.between(startLocalDate, endLocalDate) + 1);
+
+        LocalDate randomDate = startLocalDate.plusDays(randomDay);
+
+        return randomDate.format(formatter);
     }
+
+
+
 }

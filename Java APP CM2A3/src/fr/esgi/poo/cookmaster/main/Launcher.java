@@ -28,17 +28,17 @@ public class Launcher {
          *
          *
          *
-         * - Séparer les identifiants de la BDD dans un fichier a ne pas commit
+         * X - Séparer les identifiants de la BDD dans un fichier a ne pas commit
          *
-         * - Utiliser les Calendar pour les dates dans tous les fichiers
+         * X - Utiliser les Calendar pour les dates dans tous les fichiers
          *
          * - S'assurer que chaque XArray est au minimum 50 éléments dedans
          *
          * - S'assurer que la limite dans le choix Random est bien de la taille des array
          *
          *
-         * - Remplacer les valeurs brutes par des variables ou des constantes
-         * - Faire en sorte que PostalCode, RandomInt, Adress
+         * X - Remplacer les valeurs brutes par des variables ou des constantes
+         * X - Faire en sorte que PostalCode, RandomInt, Adress
          */
 
 
@@ -158,7 +158,7 @@ public class Launcher {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+ 
     }
 }
 
