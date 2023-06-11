@@ -42,7 +42,7 @@ public class DataGenerateBill {
         String billAddressOfBuyer = CommonDataGenerator.selectRandomAdress();
 
 
-        String sql = "INSERT INTO BILLS(Purchase_content, Purchase_date, Firstname_of_buyer, Lastname_of_buyer, Postal_code_of_buyer, Address_of_buyer, Cost_of_purchase, Id_1) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO BILLS(Purchase_content, Purchase_date, Firstname_of_buyer, Lastname_of_buyer, Postal_code_of_buyer, Address_of_buyer, Cost_of_purchase, Event_Id, Subscription_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         BillsModel billsModel = new BillsModel(dbName, userName, password);
 
@@ -57,6 +57,7 @@ public class DataGenerateBill {
             pstmt.setString(6, billAddressOfBuyer);
             pstmt.setInt(7, billCostOfPurchase);
             pstmt.setInt(8, i);
+            pstmt.setInt(9, i);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

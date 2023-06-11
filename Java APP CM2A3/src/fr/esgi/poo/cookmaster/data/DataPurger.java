@@ -27,11 +27,9 @@ public class DataPurger {
         RentModel rentModel = new RentModel(dbName, userName, password);
         OrganiseModel organiseModel = new OrganiseModel(dbName, userName, password);
         BuyModel buyModel = new BuyModel(dbName, userName, password);
-        GenerateModel generateModel = new GenerateModel(dbName, userName, password);
         PrintModel printModel = new PrintModel(dbName, userName, password);
         RegisterModel registerModel = new RegisterModel(dbName, userName, password);
 
-        generateModel.purge();
         buyModel.purge();
         rentModel.purge();
         organiseModel.purge();

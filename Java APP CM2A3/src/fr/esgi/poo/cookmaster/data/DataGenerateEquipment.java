@@ -34,7 +34,7 @@ public class DataGenerateEquipment {
         int equipmentCost = selectEquipmentCost(equipmentTitle, equipmentBrand);
         int equipmentType = selectEquipmentType(equipmentTitle, equipmentBrand);
 
-        String sql = "INSERT INTO EQUIPMENTS(Title, Type, Cost, Brand, Id_1) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO EQUIPMENTS(Title, Type, Cost, Brand, Event_Id) VALUES (?, ?, ?, ?, ?)";
 
         EquipmentsModel equipmentsModel = new EquipmentsModel(dbName, userName, password);
 

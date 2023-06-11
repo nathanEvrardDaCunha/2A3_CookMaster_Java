@@ -31,7 +31,7 @@ public class DataGeneratePublication {
         String publicationTitle = selectRandomPublicationTitle(randomInt);
         String publicationDescription = selectRandomPublicationDescription(randomInt);
 
-        String sql = "INSERT INTO PUBLICATIONS(Title, Publication_date, Description, Id_1) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO PUBLICATIONS(Title, Publication_date, Description, User_Id) VALUES (?, ?, ?, ?)";
 
         PublicationsModel publicationsModel = new PublicationsModel(dbName, userName, password);
 

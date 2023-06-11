@@ -111,6 +111,60 @@ public class DataGenerator {
             e.printStackTrace();
         }
 
+        /*
+            Pour 1 - 1 => relation directe
+            Pour 1 - n => relation ou 1 est aléatoirement mis a n données mais seulement de la table faible de 1
+            Pour n - n => relation ou n est aléatoirement mis a n données pour n fois
+         */
+
+        /*
+
+            Type 1 :
+            + Pour 0.1 a 0.1 => faire qu'il a 1/2 chance d'avoir une relation
+            Si il la alors faire une relation directe de nId a nId
+            - Pas besoin de vérifier qu'une relation existe déjà entre ces deux données
+
+
+            Type 2 :
+            + Pour une relation 0.1 0.n => faire qu'il a 1/2 chance d'avoir une relation
+            Si il la alors faire une relation directe de nId a randomId
+            - Pas besoin de vérifier qu'une relation existe déjà entre ces deux données
+
+
+            Type 3 :
+            + Pour une relation de 0.n a 0.n => faire qu'il a 1/2 chance d'avoir une relation
+            Si il la alors faire une relation directe de randomId a randomId
+            - Besoin de vérifier qu'une relation existe déjà entre ces deux données
+
+
+            Type 4 :
+            + Pour une relation de 1,1 a 0.n => faire que chaque donné de 1.1 soit rattaché a une donné
+            Vu qu'il a une relation, faire relation directe ou nId a randomId
+            - Pas besoin de vérifier qu'une relation existe déjà entre ces deux données
+
+
+            Type 5 :
+            + Pour une relation de 1.n a 0.n => faire que chaque donné de 1.n soit rattaché a une donné
+            (En premier) Vu qu'il a une relation, faire relation directe ou nId a randomId
+            (En second) Vu qu'il a une relation, faire relation directe ou randomId a randomId
+            - Besoin de vérifier qu'une relation existe déjà entre ces deux données
+
+         */
+
+        /*
+
+            Subscribe : Type 2 => Le faire directement dans la classe de génération de donnée (Users)
+            - Register : Type 3 (Alter)
+            - Buy :  Type 3 (Alter)
+            - Print : Type 3 (Alter)
+            - Organise : Type 5 (Alter)
+            - Rent : Type 5 (Alter)
+            Own : Type 2 => Le faire directement dans la classe de génération de donnée (Equipments)
+            Linked : Type 2 => Le faire directement dans la classe de génération de donnée (Bills)
+            Generate : Type 2 => Le faire directement dans la classe de génération de donnée (Bills)
+
+
+         */
 
     }
 
@@ -180,14 +234,6 @@ public class DataGenerator {
 
         BuyModel buyModel = new BuyModel(dbName, userName, password);
         buyModel.executeUpdate(sql);
-    }
-
-    private void generateGenerate(int i) {
-        String sql = "INSERT INTO Generate(Id, Id_1) VALUES " +
-                "(" + i + ", " + i + ")";
-
-        GenerateModel generateModel = new GenerateModel(dbName, userName, password);
-        generateModel.executeUpdate(sql);
     }
 
     private void generatePrint(int i) {
