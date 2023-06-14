@@ -27,18 +27,10 @@ public class Launcher {
          * - Rajouter des exceptions si besoin
          *
          *
-         *
-         * X - Séparer les identifiants de la BDD dans un fichier a ne pas commit
-         *
-         * X - Utiliser les Calendar pour les dates dans tous les fichiers
-         *
          * - S'assurer que chaque XArray est au minimum 50 éléments dedans
          *
          * - S'assurer que la limite dans le choix Random est bien de la taille des array
          *
-         *
-         * X - Remplacer les valeurs brutes par des variables ou des constantes
-         * X - Faire en sorte que PostalCode, RandomInt, Adress
          */
 
 

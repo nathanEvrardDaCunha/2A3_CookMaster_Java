@@ -24,7 +24,7 @@ public class DataGenerateSubscription {
         this.password = password;
     }
 
-    public void generateSubscriptions(int i) throws SQLException {
+    public void generateSubscriptions() throws SQLException {
 
         int subscriptionFrequencyOfCost = selectSubscriptionFrequencyOfCost();
 

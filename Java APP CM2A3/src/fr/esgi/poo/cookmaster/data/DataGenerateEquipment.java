@@ -26,7 +26,7 @@ public class DataGenerateEquipment {
         this.password = password;
     }
 
-    public void generateEquipments(int i) throws SQLException{
+    public void generateEquipments() throws SQLException{
 
         String equipmentTitle = selectEquipmentTitle();
         String equipmentBrand = selectEquipmentBrand();
@@ -45,7 +45,10 @@ public class DataGenerateEquipment {
             pstmt.setInt(2, equipmentType);
             pstmt.setInt(3, equipmentCost);
             pstmt.setString(4, equipmentBrand);
-            pstmt.setInt(5, i);
+
+            int randomEventId = CommonDataGenerator.selectRandomInt(1, DataGenerator.NUMBER_OF_EVENTS);
+
+            pstmt.setInt(5, randomEventId);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

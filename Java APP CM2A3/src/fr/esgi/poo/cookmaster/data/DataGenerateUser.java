@@ -35,7 +35,7 @@ public class DataGenerateUser {
         this.password = password;
     }
 
-    void generateUsers(int i) throws SQLException {
+    void generateUsers() throws SQLException {
 
         UsersModel usersModel = new UsersModel(dbName, userName, password);
 
@@ -77,9 +77,6 @@ public class DataGenerateUser {
         String userStartingSubscriptionDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_STARTING_SUBSCRIPTION_DATE_MAX);
         String userLastPurchaseDate = CommonDataGenerator.selectRandomDate(userRegistrationDate, USER_LAST_PURCHASE_DATE_MAX);
 
-        //Récupérer la fréquence de l'abonnement est l'ajouté a la date => En réalité je vais faire un UPDATE a cette utilisateur
-        //durant le moment ou je créé la table des relation entre les abonnements et les utilisateurs pour que l'utilisateur (id: 1) soit abonné a l'abonnement (id: 1)
-        //et ensuite je vais faire un UPDATE sur l'utilisateur (id: 1) pour lui ajouter la date de fin d'abonnement
         String userEndingSubscriptionDate = CommonDataGenerator.selectRandomDate(userStartingSubscriptionDate, USER_ENDING_SUBSCRIPTION_DATE_MAX);
 
         String sql = "INSERT INTO USERS(Username, Address, City, Firstname, Lastname, Postal_code, Role, Registration_date, Fidelity_point, Last_purchase_date, Ending_subscription_date, Starting_subscription_date, Sex, Birthday, Email, Password, Subscription_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -103,7 +100,10 @@ public class DataGenerateUser {
             pstmt.setString(14, userBirthday);
             pstmt.setString(15, userEmail);
             pstmt.setString(16, userPassword);
-            pstmt.setInt(17, i);
+
+            int randomSubscriptionId = CommonDataGenerator.selectRandomInt(1, DataGenerator.NUMBER_OF_SUBSCRIPTIONS);
+
+            pstmt.setInt(17, randomSubscriptionId);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -150,4 +150,25 @@ public class DataGenerateUser {
     private String selectUserName(String firstname, String lastname){
         return firstname.substring(1) + lastname + CommonDataGenerator.selectRandomInt(USER_MIN_NICKNAME_NUMBER, USER_MAX_NICKNAME_NUMBER);
     }
+
+    public void updateSubscriptionEndingDate(int i) throws SQLException{
+        UsersModel usersModel = new UsersModel(dbName, userName, password);
+        int subscriptionFrequency = usersModel.getSubscriptionFrequencyOfCostByUserId(i);
+
+        String sql = "UPDATE USERS SET Ending_subscription_date = DATE_ADD(Starting_subscription_date, INTERVAL ? DAY) WHERE Id = ?";
+
+        try {
+            PreparedStatement pstmt = usersModel.getConnection().prepareStatement(sql);
+
+            pstmt.setInt(1, subscriptionFrequency);
+            pstmt.setInt(2, i);
+
+            pstmt.executeUpdate();
+
+            System.out.println("Ending_subscription_date has been updated for user with Id " + i);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

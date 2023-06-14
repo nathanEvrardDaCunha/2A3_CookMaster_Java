@@ -21,7 +21,7 @@ public class DataGenerateEventLocation {
         this.password = password;
     }
 
-    void generateEventLocations(int i) throws SQLException{
+    void generateEventLocations() throws SQLException{
         int eventLocationCost = CommonDataGenerator.selectRandomInt(MIN_EVENT_LOCATION_COST, MAX_EVENT_LOCATION_COST);
         String eventLocationAddress = CommonDataGenerator.selectRandomAdress();
         String eventLocationPostalCode = CommonDataGenerator.selectRandomPostalCode();

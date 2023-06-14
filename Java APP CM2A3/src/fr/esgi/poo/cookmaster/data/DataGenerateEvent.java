@@ -35,7 +35,7 @@ public class DataGenerateEvent {
         this.password = password;
     }
 
-    public void generateEvents(int i) throws SQLException {
+    public void generateEvents() throws SQLException {
         int randomIndex = CommonDataGenerator.selectRandomInt(RANDOM_INDEX_MIN, CommonSettings.ALL_ARRAY_SIZE);
         String eventTitle = selectEventTitle(randomIndex);
         String eventDescription = selectEventDescription(randomIndex);

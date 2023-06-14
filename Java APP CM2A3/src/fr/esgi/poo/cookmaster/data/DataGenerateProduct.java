@@ -31,7 +31,7 @@ public class DataGenerateProduct {
         this.password = password;
     }
 
-    public void generateProducts(int i) throws SQLException {
+    public void generateProducts() throws SQLException {
 
         int productCategory = CommonDataGenerator.selectRandomInt(PRODUCT_MIN_CATEGORY, PRODUCT_MAX_CATEGORY);
         String productTitle = selectRandomTitle(productCategory);

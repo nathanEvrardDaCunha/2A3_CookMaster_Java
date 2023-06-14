@@ -1,11 +1,15 @@
 package fr.esgi.poo.cookmaster.data;
 
 import fr.esgi.poo.cookmaster.model.PublicationsModel;
+import fr.esgi.poo.cookmaster.model.UsersModel;
 import fr.esgi.poo.cookmaster.tools.CommonDataGenerator;
 import fr.esgi.poo.cookmaster.tools.CommonSettings;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class DataGeneratePublication {
 
@@ -21,11 +25,22 @@ public class DataGeneratePublication {
         this.password = password;
     }
 
-    public void generatePublications(int i) throws SQLException{
+    public void generatePublications() throws SQLException{
 
-        //PARTIE A REVOIR POUR ETRE SUR QUE CHAQUE CHOSE EST COHERENTE
-        //Etre sûr que l'utilisateur qui publie est un utilisateur qui existe (donc vérifier date d'inscription)
-        String publicationDate = CommonDataGenerator.selectRandomDate("2020-01-01", "2022-12-31");
+        PublicationsModel publicationsModel = new PublicationsModel(dbName, userName, password);
+        UsersModel usersModel = new UsersModel(dbName, userName, password);
+
+        int randomUserId = CommonDataGenerator.selectRandomInt(1, DataGenerator.NUMBER_OF_USERS);
+
+        usersModel.loadUserById(randomUserId);
+
+        Date registrationDate = usersModel.getUserRegistrationDate();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(registrationDate);
+        calendar.add(Calendar.MONTH, 6);
+
+        String publicationDate = CommonDataGenerator.selectRandomDate(registrationDate.toString(), new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime()));
 
         int randomInt = CommonDataGenerator.selectRandomInt(RANDOM_INT_MIN, CommonSettings.ALL_ARRAY_SIZE);
         String publicationTitle = selectRandomPublicationTitle(randomInt);
@@ -33,21 +48,20 @@ public class DataGeneratePublication {
 
         String sql = "INSERT INTO PUBLICATIONS(Title, Publication_date, Description, User_Id) VALUES (?, ?, ?, ?)";
 
-        PublicationsModel publicationsModel = new PublicationsModel(dbName, userName, password);
-
         try {
             PreparedStatement pstmt = publicationsModel.getConnection().prepareStatement(sql);
 
             pstmt.setString(1, publicationTitle);
             pstmt.setString(2, publicationDate);
             pstmt.setString(3, publicationDescription);
-            pstmt.setInt(4, i);
+            pstmt.setInt(4, randomUserId);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     private String selectRandomPublicationTitle(int randomInt) {
         String[] publicationTitlesArray = {

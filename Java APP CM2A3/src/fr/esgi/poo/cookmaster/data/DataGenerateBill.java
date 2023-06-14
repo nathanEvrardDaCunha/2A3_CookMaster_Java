@@ -23,7 +23,7 @@ public class DataGenerateBill {
         this.password = password;
     }
 
-    public void generateBills(int i) throws SQLException{
+    public void generateBills() throws SQLException{
 
         //Reprendre le cout d'un événement, d'un abonnement ou d'un produit
         int billCostOfPurchase = CommonDataGenerator.selectRandomInt(BILL_TEMP_MINIMUM_COST, BILL_TEMP_MAXIMUM_COST);
@@ -56,8 +56,12 @@ public class DataGenerateBill {
             pstmt.setString(5, billPostalCodeOfBuyer);
             pstmt.setString(6, billAddressOfBuyer);
             pstmt.setInt(7, billCostOfPurchase);
-            pstmt.setInt(8, i);
-            pstmt.setInt(9, i);
+
+            int randomEventId = CommonDataGenerator.selectRandomInt(1, DataGenerator.NUMBER_OF_EVENTS);
+            int randomSubscriptionId = CommonDataGenerator.selectRandomInt(1, DataGenerator.NUMBER_OF_SUBSCRIPTIONS);
+
+            pstmt.setInt(8, randomEventId);
+            pstmt.setInt(9, randomSubscriptionId);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

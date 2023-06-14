@@ -27,7 +27,7 @@ public class DataGenerateProvider {
         this.password = password;
     }
 
-    public void generateProviders(int i) throws SQLException {
+    public void generateProviders() throws SQLException {
         ProvidersModel providersModel = new ProvidersModel(dbName, userName, password);
 
         int providerType;

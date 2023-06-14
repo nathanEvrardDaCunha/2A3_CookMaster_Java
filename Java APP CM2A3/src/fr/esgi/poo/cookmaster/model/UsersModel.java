@@ -167,6 +167,24 @@ public class UsersModel extends Model {
         }
     }
 
+    public int getSubscriptionFrequencyOfCostByUserId(int userId) {
+        int frequencyOfCost = 0;
+        try {
+            String query = "SELECT s.Frequency_of_cost FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Id = " + userId;
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                frequencyOfCost = resultSet.getInt("Frequency_of_cost");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return frequencyOfCost;
+    }
+
     @Override
     public String getTableName() {
         return "users";
