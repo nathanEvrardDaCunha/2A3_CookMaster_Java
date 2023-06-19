@@ -64,6 +64,8 @@ public class DataGenerateEquipment {
             return equipmentsModel.equipmentCostExist(equipmentTitle, equipmentBrand);
         } catch (SQLException e) {
             return CommonDataGenerator.selectRandomInt(EQUIPMENT_MIN_COST, EQUIPMENT_MAX_COST);
+        } finally {
+            equipmentsModel.close();
         }
     }
 
@@ -73,6 +75,8 @@ public class DataGenerateEquipment {
             return equipmentsModel.equipmentTypeExist(equipmentTitle, equipmentBrand);
         } catch (SQLException e) {
             return CommonDataGenerator.selectRandomInt(EQUIPMENT_MIN_TYPE, EQUIPMENT_MAX_TYPE);
+        } finally {
+            equipmentsModel.close();
         }
     }
 

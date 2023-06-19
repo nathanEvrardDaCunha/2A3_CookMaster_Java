@@ -20,8 +20,9 @@ public class DataGenerateUser {
     private static final String USER_STARTING_SUBSCRIPTION_DATE_MAX = "2022-12-31";
     private static final String USER_LAST_PURCHASE_DATE_MAX = "2023-12-31";
     private static final String USER_ENDING_SUBSCRIPTION_DATE_MAX = "2024-12-31";
-    private static final int USER_MIN_FIDELITY_POINT = 0;
-    private static final int USER_MAX_FIDELITY_POINT = 1000;
+    private static final int USER_MIN_CURRENT_FIDELITY_POINT = 0;
+    private static final int USER_MAX_CURRENT_FIDELITY_POINT = 1000;
+    private static final int USER_MAX_TOTAL_FIDELITY_POINT = 50000;
     private static final int USER_MIN_NICKNAME_NUMBER = 0;
     private static final int USER_MAX_NICKNAME_NUMBER = 1000;
 
@@ -70,7 +71,8 @@ public class DataGenerateUser {
 
         int userSex = CommonDataGenerator.selectRandomInt(USER_MIN_SEX, USER_MAX_SEX);
         int userRole = CommonDataGenerator.selectRandomInt(USER_MIN_ROLE, USER_MAX_ROLE);
-        int userFidelityPoint = CommonDataGenerator.selectRandomInt(USER_MIN_FIDELITY_POINT, USER_MAX_FIDELITY_POINT);
+        int userCurrentFidelityPoint = CommonDataGenerator.selectRandomInt(USER_MIN_CURRENT_FIDELITY_POINT, USER_MAX_CURRENT_FIDELITY_POINT);
+        int userTotalFidelityPoint = CommonDataGenerator.selectRandomInt(userCurrentFidelityPoint, USER_MAX_TOTAL_FIDELITY_POINT);
 
         String userRegistrationDate = CommonDataGenerator.selectRandomDate(userBirthday, USER_REGISTRATION_DATE_MAX);
 
@@ -79,7 +81,7 @@ public class DataGenerateUser {
 
         String userEndingSubscriptionDate = CommonDataGenerator.selectRandomDate(userStartingSubscriptionDate, USER_ENDING_SUBSCRIPTION_DATE_MAX);
 
-        String sql = "INSERT INTO USERS(Username, Address, City, Firstname, Lastname, Postal_code, Role, Registration_date, Fidelity_point, Last_purchase_date, Ending_subscription_date, Starting_subscription_date, Sex, Birthday, Email, Password, Subscription_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO USERS(Username, Address, City, Firstname, Lastname, Postal_code, Role, Registration_date, Current_fidelity_point, Last_purchase_date, Ending_subscription_date, Starting_subscription_date, Sex, Birthday, Email, Password, Subscription_Id, Total_fidelity_point) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement pstmt = usersModel.getConnection().prepareStatement(sql);
@@ -92,7 +94,7 @@ public class DataGenerateUser {
             pstmt.setString(6, userPostalCode);
             pstmt.setInt(7, userRole);
             pstmt.setString(8, userRegistrationDate);
-            pstmt.setInt(9, userFidelityPoint);
+            pstmt.setInt(9, userCurrentFidelityPoint);
             pstmt.setString(10, userLastPurchaseDate);
             pstmt.setString(11, userEndingSubscriptionDate);
             pstmt.setString(12, userStartingSubscriptionDate);
@@ -104,6 +106,8 @@ public class DataGenerateUser {
             int randomSubscriptionId = CommonDataGenerator.selectRandomInt(1, DataGenerator.NUMBER_OF_SUBSCRIPTIONS);
 
             pstmt.setInt(17, randomSubscriptionId);
+            pstmt.setInt(18, userTotalFidelityPoint);
+
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -170,6 +174,8 @@ public class DataGenerateUser {
             System.out.println("Ending_subscription_date has been updated for user with Id " + i);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            usersModel.close();
         }
     }
 

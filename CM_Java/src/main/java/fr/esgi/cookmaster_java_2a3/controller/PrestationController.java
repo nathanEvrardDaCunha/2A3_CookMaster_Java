@@ -1,4 +1,4 @@
-package fr.esgi.cookmaster_java_2a3.main;
+package fr.esgi.cookmaster_java_2a3.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PrestationController {
+
+    // FAIRE UN EXTENDS DE LA CLASSE CONTROLLER
 
     private Stage stage;
     private Scene scene;

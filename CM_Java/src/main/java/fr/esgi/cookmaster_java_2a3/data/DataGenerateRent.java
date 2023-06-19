@@ -39,6 +39,8 @@ public class DataGenerateRent {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            rentModel.close();
         }
 
     }

@@ -23,7 +23,7 @@ public class CommonDataGenerator {
 
     public static int selectRandomInt(int min, int max) {
         Random random = new Random();
-        return random.nextInt(max - min) + min;
+        return random.nextInt((max + 1) - min) + min;
     }
 
     public static String selectRandomPostalCode(){

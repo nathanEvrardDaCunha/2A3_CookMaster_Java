@@ -12,4 +12,6 @@ module fr.esgi.cookmaster_java_2a3 {
     exports fr.esgi.cookmaster_java_2a3.data;
     exports fr.esgi.cookmaster_java_2a3.main;
     exports fr.esgi.cookmaster_java_2a3.tools;
+    exports fr.esgi.cookmaster_java_2a3.controller;
+    opens fr.esgi.cookmaster_java_2a3.controller to javafx.fxml;
 }

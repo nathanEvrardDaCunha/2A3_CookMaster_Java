@@ -61,6 +61,7 @@ public class DataGeneratePublication {
             e.printStackTrace();
         } finally {
             publicationsModel.close();
+            usersModel.close();
         }
     }
 

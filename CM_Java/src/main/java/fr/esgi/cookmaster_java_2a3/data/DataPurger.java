@@ -44,6 +44,21 @@ public class DataPurger {
         eventsLocationModel.purge();
         providersModel.purge();
         eventsModel.purge();
+
+        buyModel.close();
+        rentModel.close();
+        organiseModel.close();
+        printModel.close();
+        registerModel.close();
+        publicationsModel.close();
+        billsModel.close();
+        equipmentsModel.close();
+        usersModel.close();
+        subscriptionsModel.close();
+        productsModel.close();
+        eventsLocationModel.close();
+        providersModel.close();
+        eventsModel.close();
     }
 }
 

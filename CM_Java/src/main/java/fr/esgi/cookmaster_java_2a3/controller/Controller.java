@@ -1,4 +1,4 @@
-package fr.esgi.cookmaster_java_2a3.main;
+package fr.esgi.cookmaster_java_2a3.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

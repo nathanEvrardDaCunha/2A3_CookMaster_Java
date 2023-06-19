@@ -38,6 +38,8 @@ public class DataGenerateOrganise {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            organiseModel.close();
         }
     }
 

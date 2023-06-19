@@ -185,6 +185,114 @@ public class UsersModel extends Model {
         return frequencyOfCost;
     }
 
+    public int getNumberOfUserMaleAndType0() {
+        int numberOfUserMaleAndType1 = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Sex = 0 AND s.Type = 0";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                numberOfUserMaleAndType1 = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfUserMaleAndType1;
+    }
+
+    public int getNumberOfUserMaleAndType1() {
+        int numberOfUserMaleAndType1 = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Sex = 0 AND s.Type = 1";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                numberOfUserMaleAndType1 = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfUserMaleAndType1;
+    }
+
+    public int getNumberOfUserMaleAndType2() {
+        int numberOfUserMaleAndType1 = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Sex = 0 AND s.Type = 2";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                numberOfUserMaleAndType1 = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfUserMaleAndType1;
+    }
+
+    public int getNumberOfUserFemaleAndType0() {
+        int numberOfUserMaleAndType1 = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Sex = 1 AND s.Type = 0";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                numberOfUserMaleAndType1 = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfUserMaleAndType1;
+    }
+
+    public int getNumberOfUserFemaleAndType1() {
+        int numberOfUserMaleAndType1 = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Sex = 1 AND s.Type = 1";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                numberOfUserMaleAndType1 = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfUserMaleAndType1;
+    }
+
+    public int getNumberOfUserFemaleAndType2() {
+        int numberOfUserMaleAndType1 = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.Sex = 1 AND s.Type = 2";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                numberOfUserMaleAndType1 = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfUserMaleAndType1;
+    }
+
     @Override
     public String getTableName() {
         return "users";

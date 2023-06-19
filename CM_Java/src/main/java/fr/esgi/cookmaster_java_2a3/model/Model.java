@@ -73,6 +73,7 @@ abstract class Model {
     public void close() {
         try {
             this.connection.close();
+            System.out.println("FERME CETTE CONNEXION");
         } catch (SQLException e) {
             e.printStackTrace();
         }
