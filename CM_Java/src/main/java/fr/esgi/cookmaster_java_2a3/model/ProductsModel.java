@@ -15,6 +15,7 @@ public class ProductsModel extends Model {
             ResultSet resultSet = this.executeQuery("SELECT * FROM products WHERE Id = " + id);
             if (resultSet.next()) {
                 this.product = resultSet;
+                System.out.println("Product loaded: " + this.product.toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,6 +75,24 @@ public class ProductsModel extends Model {
             return -1;
         }
     }
+    public int getCAOfProduct() {
+        int totalCA = 0;
+        try {
+            String query = "SELECT Cost, Total_sell FROM products";
+            ResultSet resultSet = this.executeQuery(query);
+
+            while (resultSet.next()) {
+                int cost = resultSet.getInt("Cost");
+                int totalSell = resultSet.getInt("Total_sell");
+                totalCA += cost * totalSell;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCA;
+    }
+
 
     @Override
     public String getTableName() {

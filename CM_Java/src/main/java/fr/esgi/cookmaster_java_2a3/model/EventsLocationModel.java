@@ -66,6 +66,33 @@ public class EventsLocationModel extends Model {
         }
     }
 
+    public int getCAOfEventLocation() {
+        int totalCA = 0;
+
+        try {
+            String sql = "SELECT el.Cost, COUNT(r.User_Id) as ParticipantCount " +
+                    "FROM event_locations el " +
+                    "JOIN events e ON el.Id = e.Id " +
+                    "JOIN Register r ON r.Event_Id = e.Id " +
+                    "GROUP BY e.Id";
+
+            ResultSet resultSet = this.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int cost = resultSet.getInt("Cost");
+                int participantCount = resultSet.getInt("ParticipantCount");
+
+                totalCA += cost * participantCount;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalCA;
+    }
+
+
     @Override
     public String getTableName() {
         return "event_locations";

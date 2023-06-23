@@ -95,6 +95,33 @@ public class EquipmentsModel extends Model {
         return rs.getInt("Type");
     }
 
+    public int getCAOfEquipment() {
+        int totalCA = 0;
+
+        try {
+            String query ="SELECT e.Cost, COUNT(r.User_Id) as ParticipantCount "
+                    + "FROM equipments e "
+                    + "JOIN Register r ON r.Event_Id = e.Event_Id "
+                    + "GROUP BY e.Id";
+
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                int cost = rs.getInt("Cost");
+                int participantCount = rs.getInt("ParticipantCount");
+
+                totalCA += cost * participantCount;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalCA;
+    }
+
+
     @Override
     public String getTableName() {
         return "equipments";

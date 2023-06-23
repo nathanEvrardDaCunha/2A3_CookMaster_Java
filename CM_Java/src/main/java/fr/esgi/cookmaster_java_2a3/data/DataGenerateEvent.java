@@ -15,16 +15,11 @@ public class DataGenerateEvent {
     private static final int EVENT_STATE_ONGOING = 1;
     private static final int EVENT_STATE_PAST = 2;
     private static final int EVENT_STATE_NOT_STARTED = 0;
-    private static final int EVENT_TYPE_GOURMET = 0;
-    private static final int EVENT_TYPE_CONFERENCE = 1;
-    private static final int EVENT_TYPE_ESCAPADE = 2;
-    private static final int EVENT_TYPE_EXPO = 3;
-    private static final int EVENT_TYPE_OTHERS = 4;
-    private static final String EVENT_TITLE_GOURMET = "Gourmet";
-    private static final String EVENT_TITLE_CONFERENCE = "Conference";
-    private static final String EVENT_TITLE_ESCAPADE = "Escapade";
-    private static final String EVENT_TITLE_EXPO = "Expo";
-
+    private static final int EVENT_TYPE_ATELIER = 0;
+    private static final int EVENT_TYPE_DEGUSTATION = 1;
+    private static final int EVENT_TYPE_FORMATION = 2;
+    private static final String EVENT_TITLE_ATELIER = "Atelier";
+    private static final String EVENT_TITLE_DEGUSTATION = "Degustation";
     private final String dbName;
     private final String userName;
     private final String password;
@@ -41,7 +36,7 @@ public class DataGenerateEvent {
         String eventDescription = selectEventDescription(randomIndex);
 
         int eventType = selectEventType(eventTitle);
-        String eventStartingDate = CommonDataGenerator.selectRandomDate("2020-01-01", "2022-12-31");
+        String eventStartingDate = CommonDataGenerator.selectRandomDate("2022-01-01", "2024-12-31");
         String eventEndingDate = CommonDataGenerator.selectRandomDate(eventStartingDate, ENDING_DATE);
         int eventState = selectEventState(eventStartingDate, eventEndingDate);
 
@@ -68,21 +63,21 @@ public class DataGenerateEvent {
 
     private String selectEventTitle(int randomIndex) {
         String[] eventTitlesArray = {
-                "The Grand Gourmet Gala",
-                "Feast of Flavours Festival",
-                "The Chef Showdown",
-                "Epicurean Escapade",
-                "Bakers' Bonanza",
-                "Cuisine Carnival",
-                "Foodie Fiesta",
-                "The Taste Test Triumph",
-                "The Sizzling Summer Soirée",
-                "International Ingredient Expo",
-                "Culinary Creations Conference",
-                "The Aromatic Artisan Assembly",
-                "Decadent Desserts Display",
-                "The Savory Symposium",
-                "The Ultimate Umami Unveiling"
+                "The Grand Gourmet Atelier",
+                "Feast of Flavours Degustation",
+                "The Chef Atelier",
+                "Epicurean Atelier",
+                "Bakers' Degustation",
+                "Cuisine Degustation",
+                "Foodie Formation",
+                "The Taste Test Atelier",
+                "The Sizzling Summer Formation",
+                "International Ingredient Formation",
+                "Culinary Creations Formation",
+                "The Aromatic Artisan Atelier",
+                "Decadent Desserts Atelier",
+                "The Savory Formation",
+                "The Ultimate Umami Degustation"
         };
 
         return eventTitlesArray[randomIndex];
@@ -90,37 +85,33 @@ public class DataGenerateEvent {
 
     private String selectEventDescription(int randomIndex) {
         String[] eventDescriptionsArray = {
-                "The Grand Gourmet Gala: A high-end event gathering top chefs from all over the world to deliver a truly gourmet experience.",
-                "Feast of Flavours Festival: A multi-day event where participants can taste dishes from a multitude of culinary traditions.",
-                "The Chef Showdown: Watch as renowned chefs from diverse culinary backgrounds compete to create the most delicious and unique dishes.",
-                "Epicurean Escapade: A journey through various exquisite cuisines from around the globe. Perfect for true food lovers.",
-                "Bakers' Bonanza: A baking extravaganza where the finest pastries, breads, and other baked goods take the spotlight.",
-                "Cuisine Carnival: A festive event featuring food stalls with a wide array of different cuisines. A perfect day out for the family.",
-                "Foodie Fiesta: A celebration of food in all its glory, with numerous restaurants and food trucks showcasing their specialties.",
-                "The Taste Test Triumph: Attendees get to be the judge in a cook-off between emerging culinary talents, tasting and scoring a range of dishes.",
-                "The Sizzling Summer Soirée: A seasonal outdoor event featuring barbecues, grills and refreshing summer beverages.",
-                "International Ingredient Expo: An event for food industry professionals and enthusiasts to explore a vast range of ingredients from all over the world.",
-                "Culinary Creations Conference: A place where chefs, restaurateurs and foodies can exchange ideas and inspire each other with their culinary creations.",
-                "The Aromatic Artisan Assembly: Artisan producers showcase their aromatic products ranging from cheeses to cured meats and spices.",
-                "Decadent Desserts Display: A must-visit event for the sweet-toothed, featuring the most indulgent desserts from across the globe.",
-                "The Savory Symposium: An event focussing on savoury delicacies, including seminars and workshops by leading chefs in the industry.",
-                "The Ultimate Umami Unveiling: An event dedicated to exploring umami, the so-called 'fifth taste', with a variety of umami-rich foods to sample."
+                "The Grand Gourmet Atelier: Un atelier haut de gamme qui réunit des chefs de renommée mondiale pour offrir une véritable expérience gastronomique.",
+                "Feast of Flavours Degustation: Un événement de plusieurs jours où les participants peuvent déguster des plats d'une multitude de traditions culinaires.",
+                "The Chef Atelier: Regardez des chefs renommés de diverses traditions culinaires rivaliser pour créer les plats les plus délicieux et uniques.",
+                "Epicurean Atelier: Un atelier qui traverse diverses cuisines exquises du monde entier. Parfait pour les véritables amoureux de la nourriture.",
+                "Bakers' Degustation: Une dégustation de boulangerie où les meilleurs pâtisseries, pains et autres produits de boulangerie sont mis en avant.",
+                "Cuisine Degustation: Un événement festif avec des stands de nourriture proposant un large éventail de différentes cuisines. Une journée parfaite en famille.",
+                "Foodie Formation: Une formation pour célébrer la nourriture dans toute sa gloire, avec de nombreux restaurants et food trucks présentant leurs spécialités.",
+                "The Taste Test Atelier: Les participants deviennent juges dans un concours entre talents culinaires émergents, goûtant et notant une gamme de plats.",
+                "The Sizzling Summer Formation: Un événement saisonnier en plein air présentant des barbecues, des grillades et des boissons rafraîchissantes d'été.",
+                "International Ingredient Formation: Une formation pour les professionnels et les passionnés de l'industrie alimentaire pour explorer une vaste gamme d'ingrédients du monde entier.",
+                "Culinary Creations Formation: Un lieu où les chefs, les restaurateurs et les gourmets peuvent échanger des idées et s'inspirer mutuellement avec leurs créations culinaires.",
+                "The Aromatic Artisan Atelier: Les producteurs artisans présentent leurs produits aromatiques allant des fromages aux viandes séchées et épices.",
+                "Decadent Desserts Atelier: Un atelier incontournable pour les gourmands, présentant les desserts les plus indulgents du monde entier.",
+                "The Savory Formation: Une formation axée sur les délices salés, comprenant des séminaires et des ateliers dirigés par des chefs de file de l'industrie.",
+                "The Ultimate Umami Degustation: Un événement dédié à l'exploration de l'umami, le soi-disant 'cinquième goût', avec une variété d'aliments riches en umami à déguster."
         };
 
         return eventDescriptionsArray[randomIndex];
     }
 
     private int selectEventType(String eventTitle) {
-        if (eventTitle.contains(EVENT_TITLE_GOURMET)){
-            return EVENT_TYPE_GOURMET;
-        } else if (eventTitle.contains(EVENT_TITLE_ESCAPADE)){
-            return EVENT_TYPE_ESCAPADE;
-        } else if (eventTitle.contains(EVENT_TITLE_CONFERENCE)){
-            return EVENT_TYPE_CONFERENCE;
-        } else if (eventTitle.contains(EVENT_TITLE_EXPO)){
-            return EVENT_TYPE_EXPO;
+        if (eventTitle.contains(EVENT_TITLE_ATELIER)){
+            return EVENT_TYPE_ATELIER;
+        } else if (eventTitle.contains(EVENT_TITLE_DEGUSTATION)){
+            return EVENT_TYPE_DEGUSTATION;
         } else {
-            return EVENT_TYPE_OTHERS;
+            return EVENT_TYPE_FORMATION;
         }
     }
 

@@ -4,20 +4,20 @@ import java.sql.*;
 
 public class DataGenerator {
 
-    public static final int NUMBER_OF_SUBSCRIPTIONS = 30;
-    public static final int NUMBER_OF_EVENTS = 30;
-    public static final int NUMBER_OF_PROVIDERS = 30;
-    public static final int NUMBER_OF_EVENT_LOCATIONS = 30;
-    public static final int NUMBER_OF_USERS = 30;
-    private static final int NUMBER_OF_EQUIPMENTS = 30;
-    public static final int NUMBER_OF_BILLS = 30;
-    public static final int NUMBER_OF_PRODUCTS = 30;
-    private static final int NUMBER_OF_PUBLICATIONS = 30;
-    private static final int NUMBER_OF_BUYS = 30;
-    private static final int NUMBER_OF_ORGANISES = 30;
-    private static final int NUMBER_OF_PRINTS = 30;
-    private static final int NUMBER_OF_REGISTERS = 30;
-    private static final int NUMBER_OF_RENTS = 30;
+    public static final int NUMBER_OF_SUBSCRIPTIONS = 100;
+    public static final int NUMBER_OF_EVENTS = 100;
+    public static final int NUMBER_OF_PROVIDERS = 100;
+    public static final int NUMBER_OF_EVENT_LOCATIONS = 100;
+    public static final int NUMBER_OF_USERS = 100;
+    private static final int NUMBER_OF_EQUIPMENTS = 100;
+    public static final int NUMBER_OF_BILLS = 100;
+    public static final int NUMBER_OF_PRODUCTS = 100;
+    private static final int NUMBER_OF_PUBLICATIONS = 100;
+    private static final int NUMBER_OF_BUYS = 100;
+    private static final int NUMBER_OF_ORGANISES = 100;
+    private static final int NUMBER_OF_PRINTS = 100;
+    private static final int NUMBER_OF_REGISTERS = 100;
+    private static final int NUMBER_OF_RENTS = 100;
 
     private final String dbName;
     private final String userName;

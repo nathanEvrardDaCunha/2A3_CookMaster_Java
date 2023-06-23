@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.cookmaster_java_2a3.controller.UserTypeController">
+<AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.esgi.cookmaster_java_2a3.controller.EventTypeController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #252422;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,39 +34,34 @@
          <children>
             <AnchorPane prefHeight="572.0" prefWidth="621.0" style="-fx-background-color: #fffcf2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Text fill="#252422" strokeType="OUTSIDE" strokeWidth="0.0" text="Répartition des clients par type" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+                  <Text fill="#252422" strokeType="OUTSIDE" strokeWidth="0.0" text="Répartition des événements par type" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="#403d39" layoutX="48.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ce diagramme camembert illustrera la proportion de chaque type de client dans l'ensemble de la clientèle, mettant en évidence le type de client le plus fréquent." wrappingWidth="502.6650390625" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="529.3349609375" AnchorPane.topAnchor="80.0">
+                  <Text fill="#403d39" layoutX="48.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ce diagramme camembert montrera la proportion de chaque type d'événement organisé, révélant le type d'événement le plus populaire." wrappingWidth="502.6650390625" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="529.3349609375" AnchorPane.topAnchor="80.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <PieChart fx:id="userTypePieChart" layoutX="11.0" layoutY="139.0" prefHeight="483.0" prefWidth="984.0" title="Repartition Type Client" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="139.0" />
+                  <PieChart fx:id="eventTypePieChart" layoutX="53.0" layoutY="154.0" prefHeight="468.0" prefWidth="991.0" title="Répartition par type d'événements" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #403d39;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#openUserCAView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="CA Clients" textFill="#b2a99c">
+                        <Button mnemonicParsing="false" onAction="#openEventTypeView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="Type Evenements" textFill="#b2a99c">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#openUserTypeView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="Type Clients" textFill="#b2a99c">
+                        <Button mnemonicParsing="false" onAction="#openEventFrequencyView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="Fréquence Evenements" textFill="#b2a99c">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#openUserRegularityView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="Régularité Achat" textFill="#b2a99c">
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#openUserTopView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="Top Fildélité" textFill="#b2a99c">
+                        <Button mnemonicParsing="false" onAction="#openEventTopView" prefHeight="57.0" prefWidth="222.0" styleClass="side-styled-button" text="Top Evenements" textFill="#b2a99c">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>

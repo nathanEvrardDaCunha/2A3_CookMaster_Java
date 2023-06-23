@@ -32,7 +32,7 @@ public class Controller {
 
         // ERREUR CHANGER DE PAGE
 
-        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/event-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/event-type-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
@@ -40,21 +40,6 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
-
-    @FXML
-    protected void openPrestationView(ActionEvent event) throws IOException {
-
-        // ERREUR CHANGER DE PAGE
-
-        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/event-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     @FXML
     protected void openUserCAView(ActionEvent event) throws IOException {
@@ -91,6 +76,83 @@ public class Controller {
     @FXML
     protected void openUserTopView(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/user-top-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openEventTopView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/event-top-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openEventFrequencyView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/event-frequency-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openEventTypeView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/event-type-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openPrestationCAView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/prestation-ca-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openPrestationTypeView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/prestation-type-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openPrestationTopView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/prestation-top-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    protected void openPrestationAverageView(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/fr/esgi/cookmaster_java_2a3/prestation-average-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
 

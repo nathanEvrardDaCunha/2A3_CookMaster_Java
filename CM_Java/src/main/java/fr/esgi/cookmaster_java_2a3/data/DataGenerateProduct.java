@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 public class DataGenerateProduct {
 
-    private static final int PRODUCT_MIN_CATEGORY = 0;
-    private static final int PRODUCT_MAX_CATEGORY = 3;
-    private static final int PRODUCT_STOCK_MIN_STATE = 0;
-    private static final int PRODUCT_STOCK_MAX_STATE = 200;
+    public static final int PRODUCT_MIN_CATEGORY = 0;
+    public static final int PRODUCT_MAX_CATEGORY = 2;
+    private static final int PRODUCT_STOCK_MIN_NUMBER = 0;
+    private static final int PRODUCT_STOCK_MAX_NUMBER = 200;
     private static final int PRODUCT_CATEGORY_0_COST_MIN = 10;
     private static final int PRODUCT_CATEGORY_0_COST_MAX = 35;
     private static final int PRODUCT_CATEGORY_1_COST_MIN = 30;
@@ -20,6 +20,8 @@ public class DataGenerateProduct {
     private static final int PRODUCT_CATEGORY_2_COST_MAX = 40;
     private static final int PRODUCT_PAN_CATEGORY = 1;
     private static final int PRODUCT_KNIFE_CATEGORY = 0;
+    private static final int PRODUCT_TOTAL_SELL_MIN = 0;
+    private static final int PRODUCT_TOTAL_SELL_MAX = 100;
 
     private final String dbName;
     private final String userName;
@@ -38,9 +40,10 @@ public class DataGenerateProduct {
         String productDescription = selectRandomDescription(productCategory);
 
         int productCost = selectRandomProductCost(productCategory);
-        int productStockState = CommonDataGenerator.selectRandomInt(PRODUCT_STOCK_MIN_STATE, PRODUCT_STOCK_MAX_STATE);
+        int productStockNumber = CommonDataGenerator.selectRandomInt(PRODUCT_STOCK_MIN_NUMBER, PRODUCT_STOCK_MAX_NUMBER);
+        int productTotalSell = CommonDataGenerator.selectRandomInt(PRODUCT_TOTAL_SELL_MIN, PRODUCT_TOTAL_SELL_MAX);
 
-        String sql = "INSERT INTO PRODUCTS(Title, Cost, Description, Category, Stock_state) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTS(Title, Cost, Description, Category, Stock_number, Total_sell) VALUES (?, ?, ?, ?, ?, ?)";
 
         ProductsModel productsModel = new ProductsModel(dbName, userName, password);
 
@@ -51,7 +54,8 @@ public class DataGenerateProduct {
             pstmt.setInt(2, productCost);
             pstmt.setString(3, productDescription);
             pstmt.setInt(4, productCategory);
-            pstmt.setInt(5, productStockState);
+            pstmt.setInt(5, productStockNumber);
+            pstmt.setInt(6, productTotalSell);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -61,7 +65,7 @@ public class DataGenerateProduct {
         }
     }
 
-    private String selectRandomTitle(int productCategory){
+    public String selectRandomTitle(int productCategory){
         String[] typeOfKnifeTitle = {
                 "Couteau de chef",
                 "Couteau Santoku",

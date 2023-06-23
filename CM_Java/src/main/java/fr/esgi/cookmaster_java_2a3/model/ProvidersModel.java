@@ -111,6 +111,32 @@ public class ProvidersModel extends Model {
         return false;
     }
 
+    public int getCAOfProvider() {
+        int totalCA = 0;
+
+        try {
+            String query = "SELECT p.Cost, COUNT(o.Event_Id) as EventCount "
+                    + "FROM providers p "
+                    + "LEFT JOIN organise o ON o.Provider_Id = p.Id "
+                    + "GROUP BY p.Id";
+
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                int cost = rs.getInt("Cost");
+                int eventCount = rs.getInt("EventCount");
+
+                totalCA += cost * eventCount;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalCA;
+    }
+
 
     @Override
     public String getTableName() {

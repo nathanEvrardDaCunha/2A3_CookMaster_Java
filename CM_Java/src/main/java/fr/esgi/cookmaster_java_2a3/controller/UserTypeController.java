@@ -39,9 +39,4 @@ public class UserTypeController extends Controller {
         usersModel.close();
     }
 
-
-
-
-
-
 }

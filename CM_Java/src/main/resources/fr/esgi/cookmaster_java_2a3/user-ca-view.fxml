@@ -18,7 +18,7 @@
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" onAction="#openPrestationView" prefHeight="92.0" prefWidth="175.0" styleClass="styled-button" text="PRESTATION">
+                  <Button mnemonicParsing="false" onAction="#openPrestationCAView" prefHeight="92.0" prefWidth="175.0" styleClass="styled-button" text="PRESTATION">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font></Button>

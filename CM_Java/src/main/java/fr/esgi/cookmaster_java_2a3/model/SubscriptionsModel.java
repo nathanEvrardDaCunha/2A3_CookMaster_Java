@@ -75,6 +75,26 @@ public class SubscriptionsModel extends Model {
         }
     }
 
+    public int getCAOfSubscription() {
+        int totalCA = 0;
+        try {
+            String query = "SELECT s.Cost, COUNT(u.Subscription_Id) as SubCount FROM subscriptions s " +
+                    "LEFT JOIN users u ON s.Id = u.Subscription_Id " +
+                    "GROUP BY s.Id";
+            ResultSet resultSet = this.executeQuery(query);
+
+            while (resultSet.next()) {
+                double cost = resultSet.getDouble("Cost");
+                int subscriberCount = resultSet.getInt("SubCount");
+                totalCA += cost * subscriberCount;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCA;
+    }
+
     @Override
     public String getTableName() {
         return "subscriptions";

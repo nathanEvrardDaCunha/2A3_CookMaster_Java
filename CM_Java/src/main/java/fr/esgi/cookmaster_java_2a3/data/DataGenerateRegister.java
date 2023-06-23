@@ -18,7 +18,7 @@ public class DataGenerateRegister {
         this.password = password;
     }
 
-    void generateRegister() throws SQLException {
+    public void generateRegister() throws SQLException {
 
         RegisterModel registerModel = new RegisterModel(dbName, userName, password);
 

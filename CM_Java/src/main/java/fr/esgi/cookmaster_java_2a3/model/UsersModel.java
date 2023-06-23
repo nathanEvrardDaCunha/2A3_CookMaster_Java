@@ -1,5 +1,7 @@
 package fr.esgi.cookmaster_java_2a3.model;
 
+import javafx.util.Pair;
+
 import java.sql.*;
 
 public class UsersModel extends Model {
@@ -291,6 +293,27 @@ public class UsersModel extends Model {
             e.printStackTrace();
         }
         return numberOfUserMaleAndType1;
+    }
+
+    public Pair<String, Integer> getTopUserByFidelityScore(int rank) {
+        Pair<String, Integer> result = null;
+        try {
+            String query = "SELECT CONCAT(Firstname, ' ', Lastname) as Fullname, Total_fidelity_point " +
+                    "FROM USERS " +
+                    "ORDER BY Total_fidelity_point DESC, RAND() " +
+                    "LIMIT " + (rank - 1) + ", 1";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                String fullname = resultSet.getString("Fullname");
+                int score = resultSet.getInt("Total_fidelity_point");
+                result = new Pair<>(fullname, score);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
