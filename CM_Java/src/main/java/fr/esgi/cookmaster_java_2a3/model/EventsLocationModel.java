@@ -92,6 +92,23 @@ public class EventsLocationModel extends Model {
         return totalCA;
     }
 
+    public int getNumberOfEventsLocationUsed() {
+        int totalNumberOfRentals = 0;
+        try {
+            String query = "SELECT COUNT(*) AS TotalRentals FROM Rent r JOIN EVENTS e ON r.Event_Id = e.Id";
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                totalNumberOfRentals = resultSet.getInt("TotalRentals");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalNumberOfRentals;
+    }
+
+
+
 
     @Override
     public String getTableName() {

@@ -44,7 +44,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <PieChart fx:id="prestationCAPieChart" layoutX="53.0" layoutY="154.0" prefHeight="468.0" prefWidth="991.0" title="Répartition des prestation par CA" />
+                  <PieChart fx:id="prestationTypePieChart" layoutX="53.0" layoutY="154.0" prefHeight="468.0" prefWidth="991.0" title="Répartition des prestation par CA" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #403d39;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

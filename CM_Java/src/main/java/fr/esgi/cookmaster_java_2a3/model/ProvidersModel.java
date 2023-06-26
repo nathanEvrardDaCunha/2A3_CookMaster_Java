@@ -137,6 +137,24 @@ public class ProvidersModel extends Model {
         return totalCA;
     }
 
+    public int getNumberOfProvidersUsed() {
+        int numberOfProvidersUsed = 0;
+        try {
+            String query = "SELECT COUNT(Provider_Id) FROM Organise o JOIN Events e ON o.Event_Id = e.Id";
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                numberOfProvidersUsed = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfProvidersUsed;
+    }
+
+
 
     @Override
     public String getTableName() {

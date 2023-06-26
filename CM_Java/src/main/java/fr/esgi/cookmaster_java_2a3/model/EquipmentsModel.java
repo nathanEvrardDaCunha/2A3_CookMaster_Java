@@ -121,6 +121,25 @@ public class EquipmentsModel extends Model {
         return totalCA;
     }
 
+    public int getNumberOfEquipmentsUsed() {
+        int numberOfEquipmentsUsed = 0;
+        try {
+            String query = "SELECT COUNT(*) FROM EQUIPMENTS WHERE Event_Id IS NOT NULL";
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                numberOfEquipmentsUsed = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return numberOfEquipmentsUsed;
+    }
+
+
+
 
     @Override
     public String getTableName() {

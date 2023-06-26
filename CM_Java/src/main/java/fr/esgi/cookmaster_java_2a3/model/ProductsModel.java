@@ -93,6 +93,22 @@ public class ProductsModel extends Model {
         return totalCA;
     }
 
+    public int getNumberOfProductsUsed() {
+        int totalNumberOfSales = 0;
+        try {
+            String query = "SELECT SUM(Total_sell) AS TotalSales FROM products";
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                totalNumberOfSales = resultSet.getInt("TotalSales");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalNumberOfSales;
+    }
+
+
 
     @Override
     public String getTableName() {

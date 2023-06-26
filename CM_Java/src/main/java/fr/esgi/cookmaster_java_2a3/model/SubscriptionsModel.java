@@ -95,6 +95,22 @@ public class SubscriptionsModel extends Model {
         return totalCA;
     }
 
+    public int getNumberOfSubscriptionsUsed() {
+        int totalNumberOfSubscriptions = 0;
+        try {
+            String query = "SELECT COUNT(Subscription_Id) AS TotalSubscriptions FROM users WHERE Subscription_Id IS NOT NULL";
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                totalNumberOfSubscriptions = resultSet.getInt("TotalSubscriptions");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalNumberOfSubscriptions;
+    }
+
+
     @Override
     public String getTableName() {
         return "subscriptions";
