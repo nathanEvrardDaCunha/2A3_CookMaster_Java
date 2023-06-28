@@ -44,7 +44,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <PieChart layoutX="11.0" layoutY="139.0" prefHeight="483.0" prefWidth="984.0" title="Repartition Type Client" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="139.0" />
+                  <PieChart fx:id="userCAPieChart" layoutX="11.0" layoutY="139.0" prefHeight="483.0" prefWidth="984.0" title="Repartition Type Client" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="139.0" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #403d39;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

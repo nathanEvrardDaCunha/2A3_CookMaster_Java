@@ -316,6 +316,78 @@ public class UsersModel extends Model {
         return result;
     }
 
+    public int getTotalNumberOfInscriptionForSubscription() {
+        int totalSubscriptions = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM USERS WHERE Subscription_Id IS NOT NULL";
+            ResultSet resultSet = this.executeQuery(query);
+            if (resultSet.next()) {
+                totalSubscriptions = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalSubscriptions;
+    }
+
+    public int getTotalNumberOfInscriptionForEvent() {
+        int totalNumberOfInscriptionForEvent = 0;
+        try {
+            String query = "SELECT COUNT(*) as count FROM Register";
+
+            ResultSet resultSet = this.executeQuery(query);
+
+            if (resultSet.next()) {
+                totalNumberOfInscriptionForEvent = resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalNumberOfInscriptionForEvent;
+    }
+
+    public int getSubscriptionCostForUsersFromCity(String city) {
+        int totalCost = 0;
+        try {
+            String query = "SELECT SUM(s.Cost) as totalCost FROM USERS u " +
+                    "JOIN SUBSCRIPTIONS s ON u.Subscription_Id = s.Id " +
+                    "WHERE u.City = ?";
+
+            PreparedStatement ps = getConnection().prepareStatement(query);
+            ps.setString(1, city);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                totalCost = resultSet.getInt("totalCost");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCost;
+    }
+
+    public int getSumOfCommandForUsersFromCity(String city) {
+        int totalCommandForCity = 0;
+        try {
+            String query = "SELECT SUM(p.Cost) as Total FROM USERS u " +
+                    "JOIN Buy b ON u.Id = b.User_Id " +
+                    "JOIN PRODUCTS p ON b.Product_Id = p.Id " +
+                    "WHERE u.City = ?";
+
+            PreparedStatement ps = getConnection().prepareStatement(query);
+            ps.setString(1, city);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                totalCommandForCity = resultSet.getInt("Total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalCommandForCity;
+    }
+
+
     @Override
     public String getTableName() {
         return "users";

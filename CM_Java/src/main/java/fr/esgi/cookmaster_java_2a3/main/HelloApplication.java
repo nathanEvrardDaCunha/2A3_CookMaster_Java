@@ -73,30 +73,7 @@ public class HelloApplication extends Application {
          * Page des Statistiques des Clients :
          *
          *     (Difficile) Répartition des clients par chiffre d'affaires (CA) : Ce graphique montrera la distribution du CA parmi tous les clients, permettant d'identifier les gammes de CA les plus communes.
-         *      + //
-         *
-         * Page des Statistiques des Prestations :
-         *
-         *     CAMEMBERT (Difficile) Répartition des prestations par nombre d'événements associés : Ce graphique affiche le nombre de prestations en fonction du nombre d'événements associés, révélant la corrélation entre les deux)
-         *     + Nb de prestation "Emplacement louer pour événement"
-         *     + Nb de prestation "Equipement louer pour événement"
-         *     + Nb de prestation "Presonnel louer pour événement"
-         *     // IL FAUT FAIRE UNE MOYENNE DU NOMBRE DE X LOUER PAR EVENEMENT
-         *
-         *     CAMEMBERT (Facile - Intermédiaire) Répartition des prestations par type : Ce diagramme camembert illustrera la proportion de chaque type de prestation offerte, permettant d'identifier les prestations les plus courantes.
-         *     + Nb de prestation "Emplacement a louer"  pour événements
-         *     + Nb de prestation "Equipement a louer"  pour événements
-         *     + Nb de prestation "Personnel a louer"  pour événements
-         *     + Nb de prestation "Achat provenant de la boutique du site" 
-         *     + Nb de prestation "Abonnement au site" par client
-         *
-         *     BARRE (Intermédiaire) Top 5 des prestations les plus populaires : Ce graphique en barres affiche les cinq prestations les plus fréquentes, classées selon le nombre d'occurrences.
-         *     + Nb de prestation "Emplacement a louer pour un événement" sur les 6 derniers mois
-         *     + Nb de prestation "Equipement a louer pour un événement" sur les 6 derniers mois
-         *     + Nb de prestation "Personnel a louer pour un événement" sur les 6 derniers mois
-         *     + Nb de prestation "Achat provenant de la boutique du site" sur les 6 derniers mois
-         *     + Nb de prestation "Abonnement au site" sur les 6 derniers mois
-         *      // EMPLACEMENT / EQUIPEMENT / PERSONNEL / ACHAT / ABONNEMENT AVEC LE PLUS D'ASSOCIATION
+         *      + Pour Ville => Cout abonnement + Dépense total pour achat de produit
          */
     }
 }

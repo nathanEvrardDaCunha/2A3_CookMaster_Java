@@ -34,17 +34,17 @@
          <children>
             <AnchorPane prefHeight="572.0" prefWidth="621.0" style="-fx-background-color: #fffcf2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Text fill="#252422" strokeType="OUTSIDE" strokeWidth="0.0" text="Répartition des prestations par coût" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+                  <Text fill="#252422" strokeType="OUTSIDE" strokeWidth="0.0" text="Répartition des prestations par nombre d'événements associés" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <Text fill="#403d39" layoutX="48.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ce graphique montrera la distribution des coûts des prestations, permettant d'identifier les gammes de coûts les plus fréquentes." wrappingWidth="502.6650390625" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="529.3349609375" AnchorPane.topAnchor="80.0">
+                  <Text fill="#403d39" layoutX="48.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ce graphique affiche le nombre de prestations en fonction du nombre d'événements associés, révélant la corrélation entre les deux)" wrappingWidth="502.6650390625" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="529.3349609375" AnchorPane.topAnchor="80.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <PieChart fx:id="prestationCAPieChart" layoutX="53.0" layoutY="154.0" prefHeight="468.0" prefWidth="991.0" title="Répartition des prestation par CA" />
+                  <PieChart fx:id="prestationAveragePieChart" layoutX="53.0" layoutY="154.0" prefHeight="468.0" prefWidth="991.0" title="Répartition des prestation par nombre d'événement associé" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #403d39;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

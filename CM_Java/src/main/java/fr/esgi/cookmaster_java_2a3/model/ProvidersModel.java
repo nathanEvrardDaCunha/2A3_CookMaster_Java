@@ -155,7 +155,6 @@ public class ProvidersModel extends Model {
     }
 
 
-
     @Override
     public String getTableName() {
         return "providers";

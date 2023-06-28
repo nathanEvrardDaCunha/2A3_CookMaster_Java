@@ -107,9 +107,6 @@ public class EventsLocationModel extends Model {
         return totalNumberOfRentals;
     }
 
-
-
-
     @Override
     public String getTableName() {
         return "event_locations";

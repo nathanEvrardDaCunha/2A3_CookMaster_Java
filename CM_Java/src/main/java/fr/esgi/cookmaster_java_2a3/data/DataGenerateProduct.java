@@ -21,7 +21,7 @@ public class DataGenerateProduct {
     private static final int PRODUCT_PAN_CATEGORY = 1;
     private static final int PRODUCT_KNIFE_CATEGORY = 0;
     private static final int PRODUCT_TOTAL_SELL_MIN = 0;
-    private static final int PRODUCT_TOTAL_SELL_MAX = 100;
+    private static final int PRODUCT_TOTAL_SELL_MAX = 8;
 
     private final String dbName;
     private final String userName;

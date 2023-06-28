@@ -21,6 +21,12 @@ public class CommonDataGenerator {
     private final static int FIRSTNAME_MIN = 0;
     private final static int LASTNAME_MIN = 0;
 
+    public static String[] eventCityArray = {
+            "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier",
+            "Strasbourg", "Bordeaux", "Lille", "Rennes", "Reims", "Le Havre", "Saint-Étienne",
+            "Toulon", "Grenoble", "Dijon", "Angers", "Nîmes", "Villeurbanne", "Le Mans",
+    };
+
     public static int selectRandomInt(int min, int max) {
         Random random = new Random();
         return random.nextInt((max + 1) - min) + min;
@@ -50,33 +56,6 @@ public class CommonDataGenerator {
     }
 
     public static String selectRandomCity() {
-
-        /*
-            Faire en sorte que la ville soit bien dans le bon code postal
-         */
-
-        String[] eventCityArray = {
-                "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier",
-                "Strasbourg", "Bordeaux", "Lille", "Rennes", "Reims", "Le Havre", "Saint-Étienne",
-                "Toulon", "Grenoble", "Dijon", "Angers", "Nîmes", "Villeurbanne", "Le Mans",
-                "Aix-en-Provence", "Clermont-Ferrand", "Brest", "Limoges", "Tours", "Amiens",
-                "Perpignan", "Metz", "Besançon", "Boulogne-Billancourt", "Orléans", "Mulhouse",
-                "Rouen", "Caen", "Nancy", "Saint-Denis", "Saint-Denis", "Argenteuil", "Montreuil",
-                "Roubaix", "Dunkerque", "Tourcoing", "Nanterre", "Avignon", "Créteil", "Poitiers",
-                "Versailles", "Courbevoie", "Vitry-sur-Seine", "Colombes", "Pau", "Aulnay-sous-Bois",
-                "Asnières-sur-Seine", "Rueil-Malmaison", "Saint-Pierre", "Antibes", "Saint-Maur-des-Fossés",
-                "Champigny-sur-Marne", "La Rochelle", "Aubervilliers", "Calais", "Cannes", "Le Tampon",
-                "Béziers", "Colmar", "Bourges", "Drancy", "Mérignac", "Saint-Nazaire", "Valence",
-                "Ajaccio", "Issy-les-Moulineaux", "Noisy-le-Grand", "Villeneuve-d'Ascq", "Quimper",
-                "Antony", "Troyes", "Neuilly-sur-Seine", "La Seyne-sur-Mer", "Les Abymes", "Lorient",
-                "Sarcelles", "Pessac", "Ivry-sur-Seine", "Cergy", "Clichy", "Niort", "Chambéry", "Montauban",
-                "Vénissieux", "Beauvais", "Hyères", "Charleville-Mézières", "Cholet", "Chelles", "Meaux",
-                "Épinay-sur-Seine", "Saint-André", "La Roche-sur-Yon", "Bondy", "Levallois-Perret", "Issy-les-Moulineaux",
-                "Évry-Courcouronnes", "Arles", "Valenciennes", "Cagnes-sur-Mer", "Bobigny", "Corbeil-Essonnes",
-                "Saint-Quentin", "Pantin", "Maisons-Alfort", "Chalon-sur-Saône", "Meudon", "Fontenay-sous-Bois",
-                "Châteauroux", "Saint-Joseph", "Narbonne", "Saint-Louis", "Saint-Paul", "Albi", "Villejuif",
-        };
-
         int randomIndex = CommonDataGenerator.selectRandomInt(CITY_MIN, CommonSettings.ALL_ARRAY_SIZE);
         return eventCityArray[randomIndex];
     }
